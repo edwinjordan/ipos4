@@ -14,6 +14,9 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css" />
 
 		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-datetimepicker.css" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-fonts.css" />
@@ -35,14 +38,15 @@
 		<!-- ace settings handler -->
 		<script src="<?php echo base_url();?>assets/js/ace-extra.js"></script>
 		<script src="<?= base_url(); ?>assets/jquery/jquery-2.1.4.min.js"></script>
-
+		<script src="<?= base_url(); ?>assets/js/jquery.js"></script>
+		<script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 		<!--[if lte IE 8]>
 		<script src="../assets/js/html5shiv.js"></script>
 		<script src="../assets/js/respond.js"></script>
 		<![endif]-->
-		
+
 	</head>
 <script type="text/javascript">
 var table;
@@ -59,36 +63,38 @@ function delete_data(table,id) {
 		showCancelButton: true, confirmButtonText: "Hapus", closeOnConfirm: true,
 	},
 	function(){
-        $.ajax({ 
+        $.ajax({
             url : "<?= site_url()?>admin/delete/"+table+'/'+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
                 $('#modal_form').modal('hide');
-				swal({ title:"SUCCESS", text:"Hapus Berhasil", type: "success", closeOnConfirm: true}); 
+				swal({ title:"SUCCESS", text:"Hapus Berhasil", type: "success", closeOnConfirm: true});
                 reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-				swal({ title:"ERROR", text:"Error deleting data", type: "warning", closeOnConfirm: true}); 
+				swal({ title:"ERROR", text:"Error deleting data", type: "warning", closeOnConfirm: true});
             }
         });
 	});
 }
 function undelete_data(table,id) {
 	$.ajax({
-		url : "<?= site_url()?>admin/undelete/"+table+'/'+id, 
+		url : "<?= site_url()?>admin/undelete/"+table+'/'+id,
 		type: "POST",
 		dataType: "JSON",
 		success: function(data) {
 			$('#modal_form').modal('hide');
-			swal({ title:"SUCCESS", text:"Data Berhasil Dikembalikan", type: "success", closeOnConfirm: true}); 
+			swal({ title:"SUCCESS", text:"Data Berhasil Dikembalikan", type: "success", closeOnConfirm: true});
 			reload_table();
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			swal({ title:"ERROR", text:"Error undeleting data", type: "warning", closeOnConfirm: true}); 
+			swal({ title:"ERROR", text:"Error undeleting data", type: "warning", closeOnConfirm: true});
 		}
 	});
 }
+
+
 </script>
 <!-- <body class="hold-transition skin-blue sidebar-mini fixed"> -->
 <body class="no-skin">
@@ -362,4 +368,4 @@ function undelete_data(table,id) {
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content --><br />
-<?php $this->load->view('vfooter'); ?>	
+<?php $this->load->view('vfooter'); ?>

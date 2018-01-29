@@ -3,9 +3,7 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='<?php echo base_url();?>assets/js/jquery.js'>"+"<"+"/script>");
-		</script>
+		
 
 		<!-- <![endif]-->
 
@@ -47,6 +45,11 @@
 		<script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
 		<script src="<?php echo base_url();?>assets/js/dataTables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 		<script src="<?php echo base_url();?>assets/js/dataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
+		<script src="<?php echo base_url();?>assets/js/date-time/bootstrap-datepicker.js"></script>
+		<script src="<?php echo base_url();?>assets/js/date-time/bootstrap-timepicker.js"></script>
+		<script src="<?php echo base_url();?>assets/js/date-time/moment.js"></script>
+		<script src="<?php echo base_url();?>assets/js/date-time/daterangepicker.js"></script>
+		<script src="<?php echo base_url();?>assets/js/date-time/bootstrap-datetimepicker.js"></script>
 
 
 		<!-- inline scripts related to this page -->
@@ -54,34 +57,34 @@
 			jQuery(function($) {
 			 var $sidebar = $('.sidebar').eq(0);
 			 if( !$sidebar.hasClass('h-sidebar') ) return;
-			
+
 			 $(document).on('settings.ace.top_menu' , function(ev, event_name, fixed) {
 				if( event_name !== 'sidebar_fixed' ) return;
-			
+
 				var sidebar = $sidebar.get(0);
 				var $window = $(window);
-			
+
 				//return if sidebar is not fixed or in mobile view mode
 				var sidebar_vars = $sidebar.ace_sidebar('vars');
 				if( !fixed || ( sidebar_vars['mobile_view'] || sidebar_vars['collapsible'] ) ) {
 					$sidebar.removeClass('lower-highlight');
 					//restore original, default marginTop
 					sidebar.style.marginTop = '';
-			
+
 					$window.off('scroll.ace.top_menu')
 					return;
 				}
-			
-			
+
+
 				 var done = false;
 				 $window.on('scroll.ace.top_menu', function(e) {
-			
+
 					var scroll = $window.scrollTop();
 					scroll = parseInt(scroll / 4);//move the menu up 1px for every 4px of document scrolling
 					if (scroll > 17) scroll = 17;
-			
-			
-					if (scroll > 16) {			
+
+
+					if (scroll > 16) {
 						if(!done) {
 							$sidebar.addClass('lower-highlight');
 							done = true;
@@ -93,17 +96,17 @@
 							done = false;
 						}
 					}
-			
+
 					sidebar.style['marginTop'] = (17-scroll)+'px';
 				 }).triggerHandler('scroll.ace.top_menu');
-			
+
 			 }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
-			
+
 			 $(window).on('resize.ace.top_menu', function() {
 				$(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
 			 });
-			
-			
+
+
 			});
 		</script>
 
@@ -119,7 +122,7 @@
 		<script src="<?= base_url(); ?>assets/js/app.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets')?>/tiny_mce/tiny_mce_src.js"></script>
 		<script type="text/javascript">
-				
+
 		</script>
 	</body>
 </html>

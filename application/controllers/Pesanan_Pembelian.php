@@ -24,54 +24,27 @@ class Pesanan_Pembelian extends CI_Controller {
     }
 
 
-     public function ajax_list() {
+    public function ajax_list() {
 		$list = $this->Mdl_pesananpembelian->get_datatables();
 		$data = array();
 		$no = $_REQUEST['start'];
-		foreach ($list as $album) {
-			if($album->album_gambar==''){ $cover = 'no_image.jpg'; }else{ $cover = $album->album_gambar; }
-			$row2 = '<img src="'.base_url().'../assets/images/'.$cover.'" style="height: 500px; width: 600px;">';
+		foreach ($list as $pesanan) {
 			$no++;
 			$row = array();
 			$row[] = $no;
-			$row[] = $album->album_nama;
-			$row[] = '
-					  <a href="#modal-table'.$album->id_album.'" data-toggle="modal" class="tooltip-success" data-rel="tooltip" title="Edit">
-						<span class="green">
-							<i class="ace-icon fa fa-eye bigger-120"></i>
-						</span>
-					  </a>
-					  <div id="modal-table'.$album->id_album.'" class="modal fade" tabindex="-1">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header no-padding">
-									<div class="table-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-										<span class="white">&times;</span>
-									</button>
-									Gambar
-									</div>
-								</div>
-
-								<div class="modal-body no-padding">
-								<div align="center">
-									'.$row2.'
-								</div>		
-								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-						</div>	
-					 ';
-			$row[] = '
-			<div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Aksi <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)" onclick="edit('."'".$album->id_album."'".')">Edit</a></li>
-                            <li><a href="javascript:void(0)" onclick="hapus('."'".$album->id_album."'".')">Delete</a></li>
-							<li class="divider"></li>
-							<li><a href="gallery/'.$album->id_album.'/detail">Detail</a></li>
-                        </ul>
-            </div>';
+			$row[] = $pesanan->kode_pesanan;
+			$row[] = $pesanan->pesanan_tgl_pesan;
+			$row[] = $pesanan->pesanan_tgl_kirim;
+			$row[] = $pesanan->kode_supplier;
+			$row[] = $pesanan->supplier_nama;
+			$row[] = '';
+			$row[] = '';
+			$row[] = '';
+			$row[] = $pesanan->pesanan_ket;
+			$row[] = $pesanan->pesanan_total_akhir;
+			$row[] = $pesanan->kode_user_buat;
+			$row[] = $pesanan->kode_user_ubah;
+			$row[] = '';
 			$data[] = $row;
 		}
 
@@ -83,4 +56,72 @@ class Pesanan_Pembelian extends CI_Controller {
 				);
 		echo json_encode($output);
 	}
-}		
+
+	public function ajax_list_tb() {
+	$list = $this->Mdl_pesananpembelian->get_datatables_tb();
+	$data = array();
+	$no = $_REQUEST['start'];
+	foreach ($list as $pesanan) {
+		$no++;
+		$row = array();
+		$row[] = $pesanan->kode_supplier;
+		$row[] = $pesanan->supplier_nama;
+		$row[] = '<button type="button" class="label label-info" onclick="ambilData('.$pesanan->kode_supplier.')">Ambil Data</button>';
+		$data[] = $row;
+	}
+
+	$output = array(
+					"draw" => $_REQUEST['draw'],
+					"recordsTotal" => $this->Mdl_pesananpembelian->count_all_tb(),
+					"recordsFiltered" => $this->Mdl_pesananpembelian->count_filtered_tb(),
+					"data" => $data,
+			);
+	echo json_encode($output);
+}
+
+	function getNomor(){
+		  $rows = $this->Mdl_pesananpembelian->getnomor();
+			//print_r($this->db->last_query());
+          foreach ($rows as $row) {
+               echo $row['awalan'].str_pad($row['nomor'], 5, "0", STR_PAD_LEFT);
+          }
+	}
+
+	function updateNomor(){
+		$rows = $this->db->query('select * from t_nomor where kode="PCS"')->result_array();
+        foreach ($rows as $row) {
+            $no = $row['nomor'] + 1;
+			$aksi = $this->db->update('t_nomor',array('nomor' => $no),array('kode' => 'PCS'));
+        }
+	}
+
+	public function ajax(){
+		$supplier=$this->input->post('kode_supplier');
+		$data=$this->db->where('kode_supplier',$supplier)->get('supplier')->row();
+		$num_data=count($data);
+		if ($num_data>=1) {
+			echo "Data Valid : ".$data->supplier_nama;
+		} else {
+			echo "Data Tidak Valid";
+		}
+	}
+
+	public function popup(){
+        //$this->load->model('karyawan');
+        // $this->table->set_heading(array('Kode Supplier','Nama Supplier'));
+        // $tmp=array('table_open'=>'<table id="simple-table" class="table table-striped table-bordered table-hover" >',
+        //                 'thead_open'=>'<thead>',
+        //                 'thead_close'=> '</thead>',
+        //                 'tbody_open'=> '<tbody>',
+        //                 'tbody_close'=> '</tbody>',
+        //         );
+        // $this->table->set_template($tmp);
+        // $data['data'] = $this->Mdl_pesananpembelian->index();
+        $this->load->view('pesanan_pembelian/popup_supplier');
+  }
+
+	public function popup_stok_min(){
+				$this->load->view('pesanan_pembelian/popup_stok_min');
+	}
+
+}

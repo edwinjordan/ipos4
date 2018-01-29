@@ -32,7 +32,7 @@
 <div class="box-header">
 
 	<form action="http://www.toko73wp.com/pembelian/pembelian_simpan" method="post" accept-charset="utf-8" class="form-horizontal" enctype="multipart/form-data">
-            
+
            	<div class="col-xs-12">
            		<div class="col-xs-2">
            			<div class="form-group">
@@ -65,7 +65,7 @@
            		</div>
            		<div class="col-xs-3">
            			<div class="form-group">
-           				<input type="radio" name="jenis" value="Pembelian" checked>Pembelian 
+           				<input type="radio" name="jenis" value="Pembelian" checked>Pembelian
  						<input type="radio" name="jenis" value="Konsinyasi">Konsinyasi
            			</div>
            		</div>
@@ -91,7 +91,7 @@
            			</div>
            		</div>
            	</div>
-           	<div class="col-xs-12">	
+           	<div class="col-xs-12">
            		<div class="col-xs-2">
            			<div class="form-group">
 		           		Dept / Gudang :
@@ -106,11 +106,11 @@
 	            	</div>
            		</div>
            	</div>
-		
+
 	</form>
 
 	<button class="btn btn-default" onclick="reload_table()"><i class="fa fa-refresh"></i> Reload</button>
-	<a href="<?php echo base_url('Pesanan_Pembelian/tambah') ?>"><button class="btn btn-default"><i class="fa fa-plus"></i> Tambah Data</button></a>
+	<button class="btn btn-default" onclick="Tambah()"><i class="fa fa-plus"></i> Tambah Data</button>
 </div><br />
 <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
@@ -133,14 +133,19 @@
     <tbody></tbody>
 </table>
 </div><!-- /.span -->
-</div>					
+</div>
 </div><!-- /.row -->
 </div>
 </div>
 </div>
 
+
+<div id="form-data" style="display:none;">
+	<?php	$this->load->view('tambah_pesanan_pembelian/view_tambah_pesanan_pembelian');?>
+</div>
+
 <script>
-	var zonk=''; 
+	var zonk='';
 	var save_method;
 	var link = "<?php echo site_url('Pesanan_Pembelian')?>";
 	var table;
@@ -156,9 +161,9 @@
     function data(){
 		$('#data').fadeIn();
 	}
-	
+
 	$(document).ready(function() {
-		table = $('#dynamic-table').DataTable({ 
+		table = $('#dynamic-table').DataTable({
 
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -173,13 +178,23 @@
 
         //Set column definition initialisation properties.
         "columnDefs": [
-        { 
+        {
             "targets": [ -1 ], //last column
             "orderable": false, //set not orderable
         },
         ],
 
     });
-	
+
 	}).fnDestroy();
+
+	function Tambah() {
+		save_method = 'add';
+		$('#panel-data').fadeOut('slow');
+		$('#form-data').fadeIn('slow');
+		$.get("<?php echo site_url('Pesanan_Pembelian/getNomor')?>", $(this).serialize())
+		.done(function(data) {
+			$('#kd_transaksi').val(data);
+		});
+	}
 </script>
