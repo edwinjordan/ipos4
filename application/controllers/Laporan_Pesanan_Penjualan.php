@@ -12,4 +12,12 @@ class Laporan_Pesanan_Penjualan extends CI_Controller {
         $data['view_file']    = "laporan_pesanan_penjualan/view_laporan_pesanan_penjualan";
         $this->load->view('admin_view',$data);
     }
+
+    function Cetak_Laporan_Pesanan_Penjualan(){
+        $this->load->view('laporan_pesanan_penjualan/cetak_laporan_pesanan_penjualan');
+    }
+
+    function Cetak_Laporan_Pesanan_Penjualan_Detail(){
+        $this->load->view('laporan_pesanan_penjualan/cetak_laporan_pesanan_penjualan_detail');
+    }
 }		
