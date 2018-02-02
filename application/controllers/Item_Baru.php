@@ -17,31 +17,4 @@ class Item_Baru extends CI_Controller {
         $this->load->view('admin_view',$data);
     }
 
-    public function ajax_list_id() {
-		$list = $this->Mdl_itembaru->get_datatables_id();
-		$data = array();
-		$no = $_REQUEST['start'];
-		foreach ($list as $detail) {
-			$no++;
-			$row = array();
-			$row[] = $no;
-			$row[] = $detail->kode_item;
-			$row[] = $detail->pesanan_ket;
-			$row[] = $detail->pesanan_detail_jumlah;
-			$row[] = $detail->pesanan_detail_jumlah_ambil;
-			$row[] = $detail->satuan_ket;
-			$row[] = $detail->pesanan_detail_harga;
-			$row[] = $detail->pesanan_detail_diskon;
-			$row[] = '';
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_REQUEST['draw'],
-						"recordsTotal" => $this->Mdl_itembaru->count_all_id(),
-						"recordsFiltered" => $this->Mdl_itembaru->count_filtered_id(),
-						"data" => $data,
-				);
-		echo json_encode($output);
-	}
-}
+}		
