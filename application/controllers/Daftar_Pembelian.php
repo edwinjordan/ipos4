@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -11,15 +12,18 @@ class Daftar_Pembelian extends CI_Controller {
 		$this->load->library("session");
 	}
 
+	function tambah(){
+        $data['view_file']    = "daftar_pembelian/view_tambah_pembelian";
+        $this->load->view('admin_view',$data);		
+	}
+
+	function cetak(){
+        $this->load->view('daftar_pembelian/cetak');		
+	}
+
 	function index(){
        // $this->mdl_home->getsqurity();
         $data['view_file']    = "daftar_pembelian/view_daftar_pembelian";
-        $this->load->view('admin_view',$data);
-    }
-
-    function tambah(){
-       // $this->mdl_home->getsqurity();
-        $data['view_file']    = "tambah_daftar_pembelian/view_tambah_daftar_pembelian";
         $this->load->view('admin_view',$data);
     }
 
