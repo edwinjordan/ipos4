@@ -210,7 +210,7 @@
         <div id="form-data" style="display:none;">
             <div class="widget-box">
                 <div class="widget-header">
-                    <h4 class="widget-title">Tambah Jenis</h4>
+                    <h4 class="widget-title">Form Jenis</h4>
 
                     <div class="widget-toolbar">
                         <a href="#" data-action="collapse">
