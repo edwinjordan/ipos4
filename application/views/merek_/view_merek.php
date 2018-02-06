@@ -1,4 +1,4 @@
-<?php $title = "<i class='fa fa-file-text-o'></i>&nbsp;Satuan"; ?>
+<?php $title = "<i class='fa fa-file-text-o'></i>&nbsp;Merek"; ?>
 <div id="idImgLoader" style="margin: 0 auto; text-align: center;">
   <img src='<?php echo base_url();?>assets/img/loader-dark.gif' />
 </div>
@@ -30,8 +30,14 @@
   <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th>Satuan</th>
+<<<<<<< HEAD
+            <th>Kode Merek</th>
+            <th>Nama Merek</th>
+            <th>Keterangan merek</th>
+=======
+            <th>Merek</th>
             <th>Keterangan</th>
+>>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
             <th>Aksi</th>
         </tr>
     </thead>
@@ -49,9 +55,11 @@
 <script type="text/javascript">
 	var zonk=''; 
 	var save_method;
-
-	var link = "<?php echo site_url('Satuan')?>";
-
+<<<<<<< HEAD
+	var link = "<?php echo site_url('Merek')?>";
+=======
+	var link = "<?php echo site_url('Pesanan_Pembelian')?>";
+>>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
 	var table;
 
 	$(document).ready(function(){
@@ -76,8 +84,11 @@
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-
-            "url": "<?php echo site_url('Satuan/ajax_list')?>",
+<<<<<<< HEAD
+            "url": "<?php echo site_url('Merek/ajax_list')?>",
+=======
+            "url": "<?php echo site_url('Pesanan_Pembelian/ajax_list')?>",
+>>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
             "type": "POST"
         },
 
@@ -92,6 +103,7 @@
     });
 	
 	}).fnDestroy();
+<<<<<<< HEAD
 
   function reload_table() {
       table.ajax.reload(null, false);
@@ -164,8 +176,9 @@
         dataType: "JSON",
         success: function(result) {  
           //document.getElementById('fc_kdbahan').setAttribute('readonly','readonly');
-          $('[name="kode_satuan"]').val(result.kode_satuan);
-          $('[name="satuan_ket"]').val(result.satuan_ket);
+          $('[name="kode_merek"]').val(result.kode_merek);
+          $('[name="merek_nama"]').val(result.merek_nama);
+          $('[name="merek_ket"]').val(result.merek_ket);
         }, error: function (jqXHR, textStatus, errorThrown) {
           alert('Error get data from ajax');
         }
@@ -175,7 +188,7 @@
   function hapus(id) {
     if (confirm('Are you sure delete this data?')) {
       $.ajax ({
-        url : "<?php echo site_url('Satuan/ajax_delete')?>/"+id,
+        url : "<?php echo site_url('Merek/ajax_delete')?>/"+id,
         type: "POST",
         dataType: "JSON",
         success: function(data) {
@@ -201,7 +214,7 @@
 <div id="form-data" style="display:none;">
 <div class="widget-box">
 <div class="widget-header">
-    <h4 class="widget-title">Form Entry Satuan</h4>
+    <h4 class="widget-title">Form Entry Merek</h4>
 
   <div class="widget-toolbar">
     <a href="#" data-action="collapse">
@@ -220,15 +233,21 @@
 <div class="col-xs-12">
 <form class="form-horizontal" role="form" id="formAksi">
   <div class="form-group">
-  <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode Satuan </label>
+  <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode Merek </label>
     <div class="col-sm-10">
-      <input type="text" id="kode_satuan" name="kode_satuan" placeholder="Kode Satuan" class="col-xs-10 col-sm-5" />
+      <input type="text" id="kode_merek" name="kode_merek" placeholder="Kode Merek" class="col-xs-10 col-sm-5" />
     </div>
   </div>
   <div class="form-group">
-  <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Keterangan Satuan </label>
+  <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Merek</label>
+    <div class="col-sm-6">
+      <textarea class="form-control" id="merek_nama" name="merek_nama" placeholder="Nama Merek" class="col-xs-10 col-sm-5"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+  <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Keterangan Merek </label>
     <div class="col-sm-10">
-      <input type="text" id="satuan_ket" name="satuan_ket" placeholder="Keterangan Satuan" class="col-xs-10 col-sm-5" />
+      <input type="text" id="merek_ket" name="merek_ket" placeholder="Keterangan Merek" class="col-xs-10 col-sm-5" />
     </div>
   </div>
   <div class="col-md-offset-2 col-md-9">
@@ -243,7 +262,6 @@
           Reset
         </button>
   </div>
-
 =======
 </script>
 >>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089

@@ -30,8 +30,13 @@
   <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
+<<<<<<< HEAD
+            <th>Kode Satuan</th>
+            <th>Keterangan Satuan</th>
+=======
             <th>Satuan</th>
             <th>Keterangan</th>
+>>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
             <th>Aksi</th>
         </tr>
     </thead>
@@ -49,9 +54,11 @@
 <script type="text/javascript">
 	var zonk=''; 
 	var save_method;
-
+<<<<<<< HEAD
 	var link = "<?php echo site_url('Satuan')?>";
-
+=======
+	var link = "<?php echo site_url('Pesanan_Pembelian')?>";
+>>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
 	var table;
 
 	$(document).ready(function(){
@@ -76,8 +83,11 @@
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-
+<<<<<<< HEAD
             "url": "<?php echo site_url('Satuan/ajax_list')?>",
+=======
+            "url": "<?php echo site_url('Pesanan_Pembelian/ajax_list')?>",
+>>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
             "type": "POST"
         },
 
@@ -92,6 +102,7 @@
     });
 	
 	}).fnDestroy();
+<<<<<<< HEAD
 
   function reload_table() {
       table.ajax.reload(null, false);

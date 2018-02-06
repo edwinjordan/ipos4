@@ -30,14 +30,9 @@
   <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-<<<<<<< HEAD
             <th>Kode Merek</th>
             <th>Nama Merek</th>
             <th>Keterangan merek</th>
-=======
-            <th>Merek</th>
-            <th>Keterangan</th>
->>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
             <th>Aksi</th>
         </tr>
     </thead>
@@ -55,11 +50,7 @@
 <script type="text/javascript">
 	var zonk=''; 
 	var save_method;
-<<<<<<< HEAD
 	var link = "<?php echo site_url('Merek')?>";
-=======
-	var link = "<?php echo site_url('Pesanan_Pembelian')?>";
->>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
 	var table;
 
 	$(document).ready(function(){
@@ -79,16 +70,12 @@
 
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
-		"bDestroy": true,
+		    "bDestroy": true,
         "order": [], //Initial no order.
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-<<<<<<< HEAD
             "url": "<?php echo site_url('Merek/ajax_list')?>",
-=======
-            "url": "<?php echo site_url('Pesanan_Pembelian/ajax_list')?>",
->>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
             "type": "POST"
         },
 
@@ -103,7 +90,6 @@
     });
 	
 	}).fnDestroy();
-<<<<<<< HEAD
 
   function reload_table() {
       table.ajax.reload(null, false);
@@ -262,6 +248,3 @@
           Reset
         </button>
   </div>
-=======
-</script>
->>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
