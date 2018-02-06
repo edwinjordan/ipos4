@@ -136,6 +136,7 @@
     function Batal() {
         $('#form-data').slideUp(500,'swing');
         $('#panel-data').fadeIn(1000);
+        location.reload();
     }
 
     function save() {

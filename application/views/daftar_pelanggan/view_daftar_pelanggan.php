@@ -170,6 +170,7 @@
     function Batal() {
         $('#form-data').slideUp(500,'swing');
         $('#panel-data').fadeIn(1000);
+        location.reload();
     }
 
     function save() {
@@ -280,7 +281,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <form class="form-horizontal" role="form" id="formAksi">
-                                    <input type="hidden" name="kode_pelanggan" value="<?php echo date('his');?>">
+                                    <input type="hidden" name="kode_pelanggan">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
                                             Nama</label>
