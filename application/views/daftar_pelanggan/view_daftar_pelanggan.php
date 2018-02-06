@@ -52,7 +52,6 @@
     <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th>Kode</th>
             <th>Nama</th>
             <th>Alamat</th>
             <th>Kode Provinsi</th>
@@ -230,27 +229,25 @@
             success: function(result) {
                 //document.getElementById('fc_kdbahan').setAttribute('readonly','readonly');
                 $('[name="kode_pelanggan"]').val(result.kode_pelanggan);
-                $('[name="item_jenis_nama"]').val(result.item_jenis_nama);
-
-//                pelanggan_nama
-//                pelanggan_alamat
-//                kode_provinsi
-//                kode_kota
-//                kode_kecamatan
-//                pelanggan_kodepos
-//                pelanggan_fax
-//                pelanggan_telepon'
-//                pelanggan_nohp'
-//                pelanggan_email'
-//                pelanggan_norek'
-//                pelanggan_rekan'
-//                pelanggan_bank'
-//                pelanggan_ket'
-//                pelanggan_limjmlpiutang'
-//                pelanggan_jatuhtempo'
-//                kode_plg_grup'
-//                pelanggan_tipe_potongan'
-//                pelanggan_npwp'
+                $('[name="pelanggan_nama"]').val(result.pelanggan_nama);
+                $('[name="pelanggan_alamat"]').val(result.pelanggan_alamat);
+                $('[name="kode_provinsi"]').val(result.kode_provinsi);
+                $('[name="kode_kota"]').val(result.kode_kota);
+                $('[name="kode_kecamatan"]').val(result.kode_kecamatan);
+                $('[name="pelanggan_kodepos"]').val(result.pelanggan_kodepos);
+                $('[name="pelanggan_fax"]').val(result.pelanggan_fax);
+                $('[name="pelanggan_telepon"]').val(result.pelanggan_telepon);
+                $('[name="pelanggan_nohp"]').val(result.pelanggan_nohp);
+                $('[name="pelanggan_email"]').val(result.pelanggan_email);
+                $('[name="pelanggan_norek"]').val(result.pelanggan_norek);
+                $('[name="pelanggan_rekan"]').val(result.pelanggan_rekan);
+                $('[name="pelanggan_bank"]').val(result.pelanggan_bank);
+                $('[name="pelanggan_ket"]').val(result.pelanggan_ket);
+                $('[name="pelanggan_limjmlpiutang"]').val(result.pelanggan_limjmlpiutang);
+                $('[name="pelanggan_jatuhtempo"]').val(result.pelanggan_jatuhtempo);
+                $('[name="kode_plg_grup"]').val(result.kode_plg_grup);
+                $('[name="pelanggan_tipe_potongan"]').val(result.pelanggan_tipe_potongan);
+                $('[name="pelanggan_npwp"]').val(result.pelanggan_npwp);
 
             }, error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
@@ -265,7 +262,7 @@
         <div id="form-data" style="display:none;">
             <div class="widget-box">
                 <div class="widget-header">
-                    <h4 class="widget-title">Form Jenis</h4>
+                    <h4 class="widget-title">Form Daftar Pelanggan</h4>
 
                     <div class="widget-toolbar">
                         <a href="#" data-action="collapse">
@@ -283,23 +280,161 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <form class="form-horizontal" role="form" id="formAksi">
-                                    <input type="hidden" name="kode_item_jenis">
+                                    <input type="hidden" name="kode_pelanggan" value="<?php echo date('his');?>">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
-                                            Jenis </label>
+                                            Nama</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="item_jenis_nama" name="item_jenis_nama"
+                                            <input type="text" id="pelanggan_nama" name="pelanggan_nama"
                                                    placeholder="" class="col-xs-10 col-sm-5"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Alamat</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_alamat" name="pelanggan_alamat"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Kode Provinsi</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="kode_provinsi" name="kode_provinsi"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Kode Kota</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="kode_kota" name="kode_kota"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Kode Kecamatan</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="kode_kecamatan" name="kode_kecamatan"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Kode Pos</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_kodepos" name="pelanggan_kodepos"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Fax</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_fax" name="pelanggan_fax"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Telepon</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_telepon" name="pelanggan_telepon"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            No HP</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_nohp" name="pelanggan_nohp"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Email</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_email" name="pelanggan_email"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            No Rek</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_norek" name="pelanggan_norek"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Rekan</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_rekan" name="pelanggan_rekan"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Bank</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_bank" name="pelanggan_bank"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
                                             Keterangan</label>
                                         <div class="col-sm-6">
-                                            <textarea class="form-control" id="item_jenis_ket" name="item_jenis_ket"
+                                            <textarea class="form-control" id="pelanggan_ket" name="pelanggan_ket"
                                                       placeholder="" class="col-xs-10 col-sm-5"></textarea>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Lim Juml Piutang</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_limjmlpiutang" name="pelanggan_limjmlpiutang"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Jatuh Tempo</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_jatuhtempo" name="pelanggan_jatuhtempo"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Grup Pel</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="kode_plg_grup" name="kode_plg_grup"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            Tipe Potongan</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_tipe_potongan" name="pelanggan_tipe_potongan"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+                                            NPWP</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" id="pelanggan_npwp" name="pelanggan_npwp"
+                                                      placeholder="" class="col-xs-10 col-sm-5"></textarea>
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-md-offset-2 col-md-9">
                                         <button class="btn btn-info" type="button" id="btn_save" onclick="save()">
                                             <i class="ace-icon fa fa-check bigger-110"></i>

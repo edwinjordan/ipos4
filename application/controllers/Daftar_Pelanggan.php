@@ -126,7 +126,7 @@ class Daftar_Pelanggan extends CI_Controller
             'pelanggan_tipe_potongan'   => $this->input->post('pelanggan_tipe_potongan'),
             'pelanggan_npwp'            => $this->input->post('pelanggan_npwp'),
         );
-        $this->Mdl_jenis->update(array('kode_pelanggan' => $this->input->post('kode_pelanggan')), $data);
+        $this->Mdl_daftarpelanggan->update(array('kode_pelanggan' => $this->input->post('kode_pelanggan')), $data);
         echo json_encode(array("status" => TRUE));
     }
 
