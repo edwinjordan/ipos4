@@ -57,6 +57,35 @@ class Pesanan_Pembelian extends CI_Controller {
 		echo json_encode($output);
 	}
 
+	public function ajax_list_id() {
+	$list = $this->Mdl_pesananpembelian->get_datatables_id();
+	$data = array();
+	$no = $_REQUEST['start'];
+	foreach ($list as $pesanan) {
+		$no++;
+		$row = array();
+		$row[] = $no;
+		$row[] = $pesanan->kode_item;
+		$row[] = $pesanan->pesanan_ket;
+		$row[] = $pesanan->pesanan_detail_jumlah;
+		$row[] = '';
+		$row[] = $pesanan->satuan_ket;
+		$row[] = $pesanan->pesanan_detail_harga;
+		$row[] = $pesanan->pesanan_detail_diskon;
+		$row[] = $pesanan->pesanan_total_akhir;
+		$row[] = '';
+		$data[] = $row;
+	}
+
+	$output = array(
+					"draw" => $_REQUEST['draw'],
+					"recordsTotal" => $this->Mdl_pesananpembelian->count_all_id(),
+					"recordsFiltered" => $this->Mdl_pesananpembelian->count_filtered_id(),
+					"data" => $data,
+			);
+	echo json_encode($output);
+}
+
 	public function ajax_list_tb() {
 	$list = $this->Mdl_pesananpembelian->get_datatables_tb();
 	$data = array();
@@ -107,21 +136,15 @@ class Pesanan_Pembelian extends CI_Controller {
 	}
 
 	public function popup(){
-        //$this->load->model('karyawan');
-        // $this->table->set_heading(array('Kode Supplier','Nama Supplier'));
-        // $tmp=array('table_open'=>'<table id="simple-table" class="table table-striped table-bordered table-hover" >',
-        //                 'thead_open'=>'<thead>',
-        //                 'thead_close'=> '</thead>',
-        //                 'tbody_open'=> '<tbody>',
-        //                 'tbody_close'=> '</tbody>',
-        //         );
-        // $this->table->set_template($tmp);
-        // $data['data'] = $this->Mdl_pesananpembelian->index();
         $this->load->view('pesanan_pembelian/popup_supplier');
   }
 
 	public function popup_stok_min(){
 				$this->load->view('pesanan_pembelian/popup_stok_min');
+	}
+
+	public function popup_item(){
+				$this->load->view('pesanan_pembelian/popup_item');
 	}
 
 }

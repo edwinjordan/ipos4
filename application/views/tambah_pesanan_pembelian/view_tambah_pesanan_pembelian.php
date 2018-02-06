@@ -106,13 +106,13 @@
         <tr>
             <th>No.</th>
             <th>Kode Item</th>
-			<th>Keterangan</th>
-			<th>Jumlah Pesanan</th>
-			<th>Jumlah Sudah Terima</th>
-			<th>Satuan</th>
-			<th>Harga</th>
-			<th>Potongan</th>
-			<th>Total</th>
+						<th>Keterangan</th>
+						<th>Jumlah Pesanan</th>
+						<th>Jumlah Sudah Terima</th>
+						<th>Satuan</th>
+						<th>Harga</th>
+						<th>Potongan</th>
+						<th>Total</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -285,7 +285,7 @@
 <script>
 	var zonk='';
 	var save_method;
-	var link = "<?php echo site_url('Item_Baru')?>";
+	var link = "<?php echo site_url('Pesanan_Pembelian')?>";
 	var table;
 
 	$(function() {
@@ -345,7 +345,7 @@
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('Item_Baru/ajax_list_id')?>",
+            "url": "<?php echo site_url('Pesanan_Pembelian/ajax_list_id')?>",
             "type": "POST"
         },
 

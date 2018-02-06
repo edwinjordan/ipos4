@@ -174,7 +174,7 @@ $(function() {
     sUrl="<?=base_url()?>Pesanan_Pembelian/popup_item"; features = 'width=500px,height=500px,toolbar=no, left=450,top=100, ' +
       'directories=no, status=no, menubar=no, ' +
       'scrollbars=no, resizable=no';
-      window.open(sUrl,"winChild",features, "_blank");
+      window.open(sUrl,"winChild",features);
    });
 });
 </script>
