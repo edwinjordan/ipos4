@@ -7,7 +7,6 @@ class About extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Mdl_about');
 		$this->auth->restrict();
-		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
 	}
 	
