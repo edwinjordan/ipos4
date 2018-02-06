@@ -4,17 +4,18 @@
 <div class="row">
     <div class="col-md-2">
         <div align="right"><span>Satuan Dasar :</span></div>
+        <br>
         <div align="right"><span>Harga Pokok :</span></div>
-        <div></div>
     </div>
     <div class="col-md-3">
         <select>
-            <optgroup label="This is a group">
-                <option value="12" selected>This is item 1</option>
-                <option value="13">This is item 2</option>
-                <option value="14">This is item 3</option>
-            </optgroup>
+<!--            <optgroup label="This is a group">-->
+                <option value="12" selected>DUS</option>
+                <option value="13">PAK</option>
+                <option value="14">PCS</option>
+<!--            </optgroup>-->
         </select>
+        <br>
         <input type="text" />
     </div>
     <div class="col-md-6">
