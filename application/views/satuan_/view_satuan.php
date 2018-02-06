@@ -255,6 +255,3 @@
         </button>
   </div>
 
-=======
-</script>
->>>>>>> c36492d21f6313e81d8acd4ff5feccd2726b1089
