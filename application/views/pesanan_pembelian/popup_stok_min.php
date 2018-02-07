@@ -7,15 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css" />
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-fonts.css" />
-
-<!-- ace styles -->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
-<link href="<?= base_url(); ?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-<link href="<?= base_url(); ?>assets/plugins/select2/select2.min.css" rel="stylesheet">
 
 <script src="<?= base_url(); ?>assets/js/jquery.js"></script>
 <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body data-layout="empty-layout" data-palette="palette-0">
 <section class="content">
@@ -40,40 +36,25 @@
                	<div class="col-xs-12">
                		<div class="col-xs-2">
                			<div class="form-group">
-               				Dari Item
+               				Item
                			</div>
                		</div>
                		<div class="col-xs-3">
                			<div class="form-group">
     	           			<!-- <a data-toggle="modal" href="#modal-1"> -->
-    			           		<input type="text" class="form-control" name="kode_item" id="kd_transaksi">
+    			           		<input type="hidden" class="form-control" name="kode_item" id="kode_item" >
+                        <input type="text" class="form-control" name="item_nama" id="item_nama">
     			           	<!-- </a> -->
     		           	</div>
                		</div>
                   <div class="col-xs-1">
                			<div class="form-group">
-    		           		<button id="cariitem" type="button" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+      		           		<button type="button" onclick="cc()" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
 
     		           	</div>
 
                		</div>
-               		<div class="col-xs-1">
-               			<div class="form-group">
-               				s/d
-               			</div>
-               		</div>
-               		<div class="col-xs-3">
-               			<div class="form-group">
-    		           			<input type="text" class="form-control" name="kode_item" id="kode_item">
-    		           	</div>
-               		</div>
-                  <div class="col-xs-1">
-               			<div class="form-group">
-    		           		<button id="cari" type="button" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
 
-    		           	</div>
-
-               		</div>
 
 
     		    </div>
@@ -107,14 +88,14 @@
               </div>
               <div class="col-xs-3">
                 <div class="form-group">
-                  <!-- <a data-toggle="modal" href="#modal-1"> -->
-                    <input type="text" class="form-control" name="kode_supplier" id="kode_supplier">
+                    <input type="hidden" class="form-control" name="kode_supplier" id="kode_supplier" >
+                    <input type="text" class="form-control" name="supplier_nama" id="supplier_nama">
                   <!-- </a> -->
                 </div>
               </div>
               <div class="col-xs-1">
                 <div class="form-group">
-                  <button id="cari" type="button" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  <button type="button" onclick="cd()" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
 
                 </div>
 
@@ -158,9 +139,16 @@
                   </select>
                 </div>
               </div>
+              <div class="col-xs-3">
+                <button type="button" id="button" class="btn btn-danger">
+  												<i class="ace-icon fa fa-cogs align-top bigger-125"></i>
+  												Prosess
+  							</button>
+              </div>
             </div>
 
         </form>
+        <ul id="result"></ul>
   </div>
   </div>
   </div>
@@ -168,6 +156,57 @@
   </div>
 </section>
 </body>
+<div class="modal fade" id="modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+  		<div class="modal-content">
+    		<div class="modal-header">
+     		 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      			<h4 class="modal-title">Pilih Item</h4>
+    		</div>
+     		<div class="modal-body" style="overflow:auto;">
+          <table id="dynamic-table4" class="table table-striped table-bordered table-hover">
+              <thead>
+                  <tr>
+                      <th>Kode Item</th>
+                      <th>Nama Item</th>
+                      <th>Aksi</th>
+                  </tr>
+              </thead>
+              <tbody></tbody>
+          </table>
+			  </div>
+      		<div class="modal-footer">
+        		<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
+
+<div class="modal fade" id="modal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+  		<div class="modal-content">
+    		<div class="modal-header">
+     		 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      			<h4 class="modal-title">Pilih Supplier</h4>
+    		</div>
+     		<div class="modal-body" style="overflow:auto;">
+          <table id="dynamic-table5" class="table table-striped table-bordered table-hover">
+              <thead>
+                  <tr>
+                      <th>Kode Supplier</th>
+                      <th>Nama Supplier</th>
+                      <th>Aksi</th>
+                  </tr>
+              </thead>
+              <tbody></tbody>
+          </table>
+			  </div>
+      		<div class="modal-footer">
+        		<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
 <script type="text/javascript">
 $(function() {
    $('#cariitem').click(function(){
@@ -177,6 +216,125 @@ $(function() {
       window.open(sUrl,"winChild",features, "_blank");
    });
 });
+
+$(document).ready(function(){
+
+                 function search(){
+
+                      var kode_item=$("#kode_item").val();
+
+                      if(kode_item!=""){
+                        $("#result").html("<img style='display: block; margin: 0 auto; text-align: center; ' src='<?php echo base_url();?>assets/images/ajax-loader.gif'/>");
+                         $.ajax({
+                            type:"post",
+                            url:"<?php echo base_url('Pesanan_Pembelian/create_load'); ?>",
+                            data:"kode_item="+kode_item,
+                            success:function(data){
+                                $("#result").html(data);
+                                $("#kode_item").val("");
+                             }
+                          });
+                      }
+
+
+
+                 }
+
+                  $("#button").click(function(){
+                  	 search();
+                  });
+
+                  $('#search').keyup(function(e) {
+                     if(e.keyCode == 13) {
+                        search();
+                      }
+                  });
+});
+
+$(document).ready(function() {
+  setTimeout(function(){
+    tabel1();
+    tabel2();
+  }, 2000);
+}).fnDestroy();
+
+function tabel1(){
+  table = $('#dynamic-table4').DataTable({
+
+      "paging":   false,
+      "ordering": false,
+      "info":     false,
+      "processing": true, //Feature control the processing indicator.
+      "serverSide": true, //Feature control DataTables' server-side processing mode.
+      "bDestroy": true,
+      "order": [], //Initial no order.
+
+      // Load data for the table's content from an Ajax source
+      "ajax": {
+          "url": "<?php echo site_url('Pesanan_Pembelian/ajax_list_item')?>",
+          "type": "POST"
+      },
+
+      //Set column definition initialisation properties.
+      "columnDefs": [
+      {
+          "targets": [ -1 ], //last column
+          "orderable": false, //set not orderable
+      },
+      ],
+
+  });
+}
+
+function tabel2(){
+  table = $('#dynamic-table5').DataTable({
+
+      "paging":   false,
+      "ordering": false,
+      "info":     false,
+      "processing": true, //Feature control the processing indicator.
+      "serverSide": true, //Feature control DataTables' server-side processing mode.
+      "bDestroy": true,
+      "order": [], //Initial no order.
+
+      // Load data for the table's content from an Ajax source
+      "ajax": {
+          "url": "<?php echo site_url('Pesanan_Pembelian/ajax_list_tb')?>",
+          "type": "POST"
+      },
+
+      //Set column definition initialisation properties.
+      "columnDefs": [
+      {
+          "targets": [ -1 ], //last column
+          "orderable": false, //set not orderable
+      },
+      ],
+
+  });
+}
+
+function cc() {
+	$("#modal-1").modal('show');
+}
+
+function cd() {
+	$("#modal-2").modal('show');
+}
+
+function pilihDataitem(id, nama){
+    document.getElementById('item_nama').value = nama;
+		document.getElementById('kode_item').value = id;
+		$('#modal-1').modal('hide');
+}
+
+function pilihDatasupplier(id2, nama2){
+    document.getElementById('supplier_nama').value = nama2;
+		document.getElementById('kode_supplier').value = id2;
+		$('#modal-2').modal('hide');
+}
+
+
 </script>
 <script src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
 <script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.js"></script>

@@ -13,11 +13,11 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css" />
 
+
 		<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-timepicker.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/daterangepicker.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-datetimepicker.css" />
-
 		<!-- text fonts -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-fonts.css" />
 
@@ -39,7 +39,7 @@
 		<script src="<?php echo base_url();?>assets/js/ace-extra.js"></script>
 		<script src="<?= base_url(); ?>assets/jquery/jquery-2.1.4.min.js"></script>
 		<script src="<?= base_url(); ?>assets/js/jquery.js"></script>
-<!--		<script src="--><?//= base_url(); ?><!--assets/js/jquery.min.js"></script>-->
+    <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 		<!--[if lte IE 8]>

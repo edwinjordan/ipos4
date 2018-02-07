@@ -189,4 +189,10 @@ class Mdl_pesananpembelian extends CI_Model {
 			$this->db->get('item_jenis');
 		}
 
+		public function get_all_item(){
+			$this->db->select('kode_item');
+			$this->db->select('item_nama');
+			return $this->db->get('item');
+		}
+
 }

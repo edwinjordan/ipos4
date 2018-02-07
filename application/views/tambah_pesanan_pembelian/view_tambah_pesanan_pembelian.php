@@ -78,7 +78,8 @@
            		</div>
            		<div class="col-xs-2">
            			<div class="form-group">
-		           		<input type="text" class="form-control" name="kode_supplier" id="kode_supplier" disabled>
+		           		<input type="hidden" class="form-control" name="kode_supplier" id="kode_supplier" disabled>
+									<input type="text" class="form-control" name="supplier_nama" id="supplier_nama" disabled>
 		           	</div>
 
            		</div>

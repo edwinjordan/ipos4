@@ -6,6 +6,7 @@ class Pesanan_Pembelian extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Mdl_pesananpembelian');
+		$this->load->model('Mdl_item');
 		$this->auth->restrict();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
@@ -87,26 +88,48 @@ class Pesanan_Pembelian extends CI_Controller {
 }
 
 	public function ajax_list_tb() {
-	$list = $this->Mdl_pesananpembelian->get_datatables_tb();
-	$data = array();
-	$no = $_REQUEST['start'];
-	foreach ($list as $pesanan) {
-		$no++;
-		$row = array();
-		$row[] = $pesanan->kode_supplier;
-		$row[] = $pesanan->supplier_nama;
-		$row[] = '<button type="button" class="label label-info" onclick="ambilData('.$pesanan->kode_supplier.')">Ambil Data</button>';
-		$data[] = $row;
+		$list = $this->Mdl_pesananpembelian->get_datatables_tb();
+		$data = array();
+		$no = $_REQUEST['start'];
+		foreach ($list as $pesanan) {
+			$no++;
+			$row = array();
+			$row[] = $pesanan->kode_supplier;
+			$row[] = $pesanan->supplier_nama;
+			$row[] = '<button type="button" class="label label-info" onclick="pilihDatasupplier('.$pesanan->kode_supplier.',\''.$pesanan->supplier_nama.'\')">Ambil Data</button>';
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_REQUEST['draw'],
+						"recordsTotal" => $this->Mdl_pesananpembelian->count_all_tb(),
+						"recordsFiltered" => $this->Mdl_pesananpembelian->count_filtered_tb(),
+						"data" => $data,
+				);
+		echo json_encode($output);
 	}
 
-	$output = array(
-					"draw" => $_REQUEST['draw'],
-					"recordsTotal" => $this->Mdl_pesananpembelian->count_all_tb(),
-					"recordsFiltered" => $this->Mdl_pesananpembelian->count_filtered_tb(),
-					"data" => $data,
-			);
-	echo json_encode($output);
-}
+	public function ajax_list_item() {
+		$list = $this->Mdl_item->get_datatables_item();
+		$data = array();
+		$no = $_REQUEST['start'];
+		foreach ($list as $pesanan) {
+			$no++;
+			$row = array();
+			$row[] = $pesanan->kode_item;
+			$row[] = $pesanan->item_nama;
+			$row[] = '<button type="button" class="label label-info" onclick="pilihDataitem('.$pesanan->kode_item.',\''.$pesanan->item_nama.'\')">Ambil Data</button>';
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_REQUEST['draw'],
+						"recordsTotal" => $this->Mdl_item->count_all_item(),
+						"recordsFiltered" => $this->Mdl_item->count_filtered_item(),
+						"data" => $data,
+				);
+		echo json_encode($output);
+	}
 
 	function getNomor(){
 		  $rows = $this->Mdl_pesananpembelian->getnomor();
@@ -145,6 +168,14 @@ class Pesanan_Pembelian extends CI_Controller {
 
 	public function popup_item(){
 				$this->load->view('pesanan_pembelian/popup_item');
+	}
+
+	public function pembelian_item_get(){
+		echo json_encode($this->Mdl_pesananpembelian->get_all_item()->result());
+	}
+
+	public function create_load(){
+		$this->load->view('pesanan_pembelian/load_stok');
 	}
 
 }

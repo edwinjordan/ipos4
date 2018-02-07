@@ -57,8 +57,9 @@
 </div>
 </body>
 <script type="text/javascript">
-function ambilData(kode_supplier){
+function pilihDatasupplier(kode_supplier, supplier_nama){
 opener.document.form1.kode_supplier.value = kode_supplier;
+opener.document.form1.supplier_nama.value = supplier_nama;
 window.opener.focus();
 window.close();
 }
