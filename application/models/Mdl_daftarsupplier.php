@@ -1,12 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mdl_gudang extends CI_Model {
+class Mdl_daftarsupplier extends CI_Model {
 
-	var $table = 'gudang';
-	var $column_order = array('id_gudang','kode_gudang_fungsi','gudang_ket','gudang_alamat','gudang_telepon','gudang_fax',null); //set column field database for datatable orderable
-	var $column_search = array('id_gudang','kode_gudang_fungsi','gudang_ket','gudang_alamat','gudang_telepon','gudang_fax',); //set column field database for datatable searchable just title , author , category are searchable
-	var $order = array('id_gudang' => 'asc'); // default order
-
+	var $table = 'supplier';
+	var $column_order = array('kode_supplier','supplier_nama','supplier_alamat','kode_provinsi','kode_kota','kode_kecamatan','supplier_kodepos','supplier_fax','supplier_telpon','supplier_email','supplier_nohp','supplier_norek','supplier_rekan','supplier_bank','supplier_ket','supplier_jatuhtempo',null); //set column field database for datatable orderable
+	var $column_search = array('kode_supplier','supplier_nama','supplier_alamat','kode_provinsi','kode_kota','kode_kecamatan','supplier_kodepos','supplier_fax','supplier_telpon','supplier','supplier_nohp','supplier_norek','supplier_rekan','supplier_bank','supplier_ket','supplier_jatuhtempo'); //set column field database for datatable searchable just title , author , category are searchable
+	var $order = array('kode_supplier' => 'asc'); // default order
 	private function _get_datatables_query() {
 		$this->db->from($this->table);
 		$i = 0;
@@ -18,7 +17,7 @@ class Mdl_gudang extends CI_Model {
 				} else {
 					$this->db->or_like($item, $_REQUEST['search']["value"]);
 			}
-
+			
 			if (count($this->column_search) - 1 == $i)
 				$this->db->group_end();
 			}
@@ -33,6 +32,10 @@ class Mdl_gudang extends CI_Model {
 			$this->db->order_by(key($order), $order[key($order)]);
 		}
 	}
+
+    public function getAll(){
+        return $this->db->get($this->table);
+    }
 
 	function count_filtered() {
 		$this->_get_datatables_query();
@@ -55,9 +58,6 @@ class Mdl_gudang extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-	public function getall(){
-	    return $this->db->get($this->table);
-    }
 	
 	public function add($data) {
 		$this->db->insert($this->table, $data);
@@ -66,7 +66,7 @@ class Mdl_gudang extends CI_Model {
 	
 	public function get_by_id($id) {
 		$this->db->from($this->table);
-		$this->db->where('id_gudang',$id);
+		$this->db->where('kode_supplier',$id);
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -77,7 +77,7 @@ class Mdl_gudang extends CI_Model {
 	}
 	
 	public function delete_by_id($id) {
-		$this->db->where('id_gudang', $id);
+		$this->db->where('kode_supplier', $id);
 		$this->db->delete($this->table);
 	}
 }	

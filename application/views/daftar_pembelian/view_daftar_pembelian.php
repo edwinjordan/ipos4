@@ -61,8 +61,9 @@
               <div class="col-xs-2">
                 <div class="form-group">
                   <select name="jenis_faktur" id="jenis_faktur" class="form-control" data-live-search="true" data-width="100%" required="" onchange="javascript:selectfaktur()">
-                          <option value="utm">UTM</option>
-                          <option value="gd">GD</option>
+                      <?php foreach ($gudang as $g){?>
+                      <option value="<?php echo $g['id_gudang']?>"><?php echo $g['gudang_ket']?></option>
+                      <?php } ?>
                       </select>
                 </div>
               </div>

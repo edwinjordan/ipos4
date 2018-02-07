@@ -6,7 +6,9 @@ class Daftar_Pembelian extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('Mdl_daftarpembelian');
+        $this->load->model('Mdl_daftarpembelian');
+        $this->load->model('Mdl_gudang');
+        $this->load->model('Mdl_daftarsupplier');
 		$this->auth->restrict();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
@@ -14,6 +16,7 @@ class Daftar_Pembelian extends CI_Controller {
 
 	function tambah(){
         $data['view_file']    = "daftar_pembelian/view_tambah_pembelian";
+        $data['supplier']   = $this->Mdl_daftarsupplier->getAll()->result_array();
         $this->load->view('admin_view',$data);		
 	}
 
@@ -24,6 +27,7 @@ class Daftar_Pembelian extends CI_Controller {
 	function index(){
        // $this->mdl_home->getsqurity();
         $data['view_file']    = "daftar_pembelian/view_daftar_pembelian";
+        $data['gudang'] = $this->Mdl_gudang->getall()->result_array();
         $this->load->view('admin_view',$data);
     }
 

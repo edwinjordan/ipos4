@@ -33,12 +33,17 @@
                     <div class="col-md-4">
                         <select class="col-md-6" data-live-search="true" data-width="100%" required=""
                                 id="kode_item_jenis" name="kode_item_jenis">
+<!--                            <optgroup label="This is a group">-->
                             <option value="3"></option>
                             <option value="4">7</option>
                             <option value="5">14</option>
                             <option value="6">30</option>
                             <option value="7">60</option>
+<!--                            </optgroup>-->
+
                         </select>
+
+
                         <button class="btn btn-default btn-xs" onclick="cari()"><i
                                     class="fa fa-plus"></i>
                         </button>

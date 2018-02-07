@@ -128,8 +128,9 @@
               <div class="col-xs-2">
                 <div class="form-group">
                   <select class="form-control" data-live-search="true" data-width="100%" required="" name="supplier">
-                    <option value=""></option>
-                    <option value=""></option>
+                      <?php foreach ($supplier as $sup){?>
+                    <option value="<?php echo $sup['kode_supplier']?>"><?php echo $sup['supplier_nama']?></option>
+                      <?php } ?>
                   </select>
                 </div>
               </div>
