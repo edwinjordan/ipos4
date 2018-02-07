@@ -11,7 +11,7 @@
         </div><!-- /.page-header -->
 
         <div id="panel-data">
-            <div class="widget-box">
+            <div  class="widget-box">
                 <div class="widget-header">
 
                     <div class="widget-toolbar">
@@ -26,8 +26,9 @@
                 </div>
 
                 <div class="widget-body">
+                    <form class="form-horizontal" role="form" id="formAksi">
                     <div class="widget-main">
-                        <div class="row">
+                        <md- class="row">
                             <div class="col-xs-12">
 
                                 <ul class="nav nav-tabs nav-justified">
@@ -98,12 +99,11 @@
                                 </div>
                             </div>
                         </div>
-
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
-</div>
 
 <script type="text/javascript">
     var zonk = '';
