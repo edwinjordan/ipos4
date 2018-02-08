@@ -1,16 +1,18 @@
 <?php
 $id = $_POST['kode_item'];
+$id2 = $_POST['kode_item_jenis'];
+$id3 = $_POST['kode_gudang'];
 ?>
 
 <section class="content">
 <div class="page-header">
-	<h1>
+	<h1 >
     Stok Minimum
 	</h1>
 </div><!-- /.page-header -->
 
 <div id="panel-data">
-
+<form method="post" id="formAksi">
 <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
@@ -24,7 +26,14 @@ $id = $_POST['kode_item'];
         </tr>
     </thead>
     <tbody></tbody>
-</table>
+</table><br />
+<div class="col-xs-3">
+  <button type="button" id="button" class="btn btn-primary">
+            <i class="ace-icon fa fa-plus align-top bigger-125"></i>
+            Pilih
+  </button>
+</div>
+</form>
 </div>
 
 </section>
@@ -34,6 +43,8 @@ $id = $_POST['kode_item'];
 	var table;
 	var link = "<?php echo site_url('Item')?>";
 	var kdItem = "<?php echo @$id;?>";
+  var kdJenis = "<?php echo @$id2;?>";
+  var kdGudang = "<?php echo @$id3;?>";
 
   $(document).ready(function() {
 		table = $('#dynamic-table').DataTable({
@@ -48,7 +59,7 @@ $id = $_POST['kode_item'];
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": link+"/ajax_listid/"+kdItem,
+            "url": link+"/ajax_listid/"+kdItem+"/"+kdJenis+"/"+kdGudang,
             "type": "POST"
         },
 

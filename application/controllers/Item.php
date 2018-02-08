@@ -14,7 +14,9 @@ class Item extends CI_Controller {
 
   public function ajax_listid() {
 		$kdItem = $this->uri->segment(3);
-		$list = $this->Mdl_iteme->get_datatablesid($kdItem);
+    $kdJenis = $this->uri->segment(4);
+    $kdGudang = $this->uri->segment(5);
+		$list = $this->Mdl_iteme->get_datatablesid($kdItem,$kdJenis, $kdGudang);
 		//print_r($this->db->last_query());
 		$data = array();
 		$no = $_REQUEST['start'];
@@ -23,7 +25,8 @@ class Item extends CI_Controller {
 			$no++;
 			$row = array();
 			$row[] = $no;
-      $row[] = '';
+      $row[] = '
+            <input type="checkbox" name="cb_data[]" id="cb_data[]" value="'.$item->kode_item.'">';
 			$row[] = $item->kode_item;
 			$row[] = $item->item_nama;
       $row[] = $item->item_jenis_nama;
@@ -34,8 +37,8 @@ class Item extends CI_Controller {
 
 		$output = array(
 						"draw" => $_REQUEST['draw'],
-						"recordsTotal" => $this->Mdl_iteme->count_allid($kdItem),
-						"recordsFiltered" => $this->Mdl_iteme->count_filteredid($kdItem),
+						"recordsTotal" => $this->Mdl_iteme->count_allid($kdItem,$kdJenis,$kdGudang),
+						"recordsFiltered" => $this->Mdl_iteme->count_filteredid($kdItem,$kdJenis,$kdGudang),
 						"data" => $data,
 				);
 		echo json_encode($output);

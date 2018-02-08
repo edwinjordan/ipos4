@@ -55,52 +55,48 @@
     		           	</div>
 
                		</div>
+                  <div class="col-xs-2">
+                    <div class="form-group">
+                      Jenis
+                    </div>
+                  </div>
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <!-- <a data-toggle="modal" href="#modal-1"> -->
+                      <select class="form-control" name="kode_item_jenis" id="kode_item_jenis">
+                          <?php
+                          $item = $this->db->get('item_jenis');
+                          foreach ($item->result() as $jenis): ?>
+                              <option value="<?php echo $jenis->kode_item_jenis;?>"><?php echo $jenis->item_jenis_nama;?></option>
+                          <?php endforeach; ?>
 
-
-
+                      </select>
+                    </div>
+                  </div>
     		    </div>
+
+
 
             <div class="col-xs-12">
               <div class="col-xs-2">
                 <div class="form-group">
-                  Jenis
+                  Gudang/ Dept
                 </div>
               </div>
               <div class="col-xs-3">
                 <div class="form-group">
                   <!-- <a data-toggle="modal" href="#modal-1"> -->
-                  <select class="form-control" name="kode_item_jenis">
+                  <select class="form-control" name="kode_gudang" id="kode_gudang">
                       <?php
-                      $item = $this->db->get('item_jenis');
+                      $item = $this->db->get('gudang');
                       foreach ($item->result() as $jenis): ?>
-                          <option value="<?php echo $jenis->kode_item_jenis;?>"><?php echo $jenis->item_jenis_nama;?></option>
+                          <option value="<?php echo $jenis->id_gudang;?>"><?php echo $jenis->gudang_ket;?></option>
                       <?php endforeach; ?>
 
                   </select>
                 </div>
               </div>
-            </div>
 
-            <div class="col-xs-12">
-              <div class="col-xs-2">
-                <div class="form-group">
-                  Supplier
-                </div>
-              </div>
-              <div class="col-xs-3">
-                <div class="form-group">
-                    <input type="hidden" class="form-control" name="kode_supplier" id="kode_supplier" >
-                    <input type="text" class="form-control" name="supplier_nama" id="supplier_nama">
-                  <!-- </a> -->
-                </div>
-              </div>
-              <div class="col-xs-1">
-                <div class="form-group">
-                  <button type="button" onclick="cd()" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
-
-                </div>
-
-              </div>
               <div class="col-xs-2">
                 <div class="form-group">
                   Urut Berdasarkan
@@ -120,35 +116,36 @@
               </div>
 
             </div>
-
             <div class="col-xs-12">
-              <div class="col-xs-2">
+              <!-- <div class="col-xs-2">
                 <div class="form-group">
-                  Gudang/ Dept
+                  Supplier
                 </div>
               </div>
               <div class="col-xs-3">
                 <div class="form-group">
-                  <!-- <a data-toggle="modal" href="#modal-1"> -->
-                  <select class="form-control" name="kode_item_jenis">
-                      <?php
-                      $item = $this->db->get('gudang');
-                      foreach ($item->result() as $jenis): ?>
-                          <option value="<?php echo $jenis->id_gudang;?>"><?php echo $jenis->gudang_ket;?></option>
-                      <?php endforeach; ?>
+                    <input type="hidden" class="form-control" name="kode_supplier" id="kode_supplier" >
+                    <input type="text" class="form-control" name="supplier_nama" id="supplier_nama">
 
-                  </select>
                 </div>
               </div>
+              <div class="col-xs-1">
+                <div class="form-group">
+                  <button type="button" onclick="cd()" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                </div>
+
+              </div> -->
               <div class="col-xs-3">
                 <button type="button" id="button" class="btn btn-danger">
-  												<i class="ace-icon fa fa-cogs align-top bigger-125"></i>
-  												Prosess
-  							</button>
+                          <i class="ace-icon fa fa-cogs align-top bigger-125"></i>
+                          Prosess
+                </button>
               </div>
+
             </div>
 
-        </form>
+        </form><br />
         <ul id="result"></ul>
   </div>
   </div>
@@ -224,16 +221,17 @@ $(document).ready(function(){
                  function search(){
 
                       var kode_item=$("#kode_item").val();
+                      var kode_item_jenis=$("#kode_item_jenis").val();
+                      var kode_gudang=$("#kode_gudang").val();
 
-                      if(kode_item!=""){
+                      if(kode_item!="" && kode_item_jenis!="" && kode_gudang!=""){
                         $("#result").html("<img style='display: block; margin: 0 auto; text-align: center; ' src='<?php echo base_url();?>assets/images/ajax-loader.gif'/>");
                          $.ajax({
                             type:"post",
                             url:"<?php echo base_url('Pesanan_Pembelian/create_load'); ?>",
-                            data:"kode_item="+kode_item,
+                            data:{kode_item:kode_item, kode_item_jenis:kode_item_jenis, kode_gudang:kode_gudang},
                             success:function(data){
                                 $("#result").html(data);
-                                $("#kode_item").val("");
                              }
                           });
                       }

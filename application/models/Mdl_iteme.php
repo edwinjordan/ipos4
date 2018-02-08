@@ -7,9 +7,11 @@ class Mdl_iteme extends CI_Model {
 	var $column_searchid = array('a.kode_item','a.kode_item_tipe','a.kode_item_jenis','a.kode_merek','a.kode_gudang','a.kode_rak','a.item_nama','a.item_ket','a.item_status_jual','a.item_stok_min','b.item_jenis_nama');
 	var $orderid = array('a.kode_item' => 'asc');
 
-  public function get_datatablesid($id) {
+  public function get_datatablesid($id, $id2, $id3) {
 		$this->_get_datatables_queryid();
 		$this->db->where('a.kode_item',$id);
+    $this->db->where('a.kode_item_jenis',$id2);
+    $this->db->where('a.kode_gudang',$id3);
 
 		if ($_REQUEST['length'] != -1) {
 			$this->db->limit($_REQUEST['length'], $_REQUEST['start']);
@@ -48,14 +50,16 @@ class Mdl_iteme extends CI_Model {
 		}
 	}
 
-	function count_filteredid($id) {
+	function count_filteredid($id, $id2, $id3) {
 		$this->_get_datatables_queryid();
 		$this->db->where('a.kode_item',$id);
+    $this->db->where('a.kode_item_jenis',$id2);
+    $this->db->where('a.kode_gudang',$id3);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	function count_allid($id) {
+	function count_allid($id, $id2, $id3) {
 		$this->db->from($this->table2);
 		return $this->db->count_all_results();
 	}
