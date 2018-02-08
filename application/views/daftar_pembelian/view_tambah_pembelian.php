@@ -129,7 +129,7 @@
                 <div class="form-group">
                   <select class="form-control" data-live-search="true" data-width="100%" required="" name="supplier">
                       <?php foreach ($supplier as $sup){?>
-                    <option value="<?php echo $sup['kode_supplier']?>"><?php echo $sup['supplier_nama']?></option>
+                    <option value="<?php echo $sup['kode_supplier']?>"><?php echo $sup['kode_supplier']?> - <?php echo $sup['supplier_nama']?></option>
                       <?php } ?>
                   </select>
                 </div>
