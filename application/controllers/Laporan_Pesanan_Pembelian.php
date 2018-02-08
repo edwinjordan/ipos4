@@ -12,12 +12,4 @@ class Laporan_Pesanan_Pembelian extends CI_Controller {
         $data['view_file']    = "laporan_pesanan_pembelian/view_laporan_pesanan_pembelian";
         $this->load->view('admin_view',$data);
     }
-
-	function cetak_rekap(){
-        $this->load->view('laporan_pesanan_pembelian/cetak_lap_beli_rekap');		
-	}
-
-	function cetak_detail(){
-        $this->load->view('laporan_pesanan_pembelian/cetak_lap_beli_detail');		
-	}
 }		
