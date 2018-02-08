@@ -14,6 +14,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body data-layout="empty-layout" data-palette="palette-0">
+<div style="height:700px; width:100%; overflow-y:scroll ; overflow-x: hidden; padding-bottom:10px;">
 <section class="content">
   <div class="widget-box">
   <div class="widget-header">
@@ -155,6 +156,7 @@
   </div>
   </div>
 </section>
+</div>
 </body>
 <div class="modal fade" id="modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div class="modal-dialog">
