@@ -7,7 +7,6 @@ class About extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Mdl_about');
 		$this->auth->restrict();
-		$this->load->library("session");
 	}
 	
 	 function index(){
