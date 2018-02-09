@@ -124,6 +124,13 @@ class Mdl_pesananpembelian extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function updatenomor(){
+		$this->db->from('t_nomor');
+		$this->db->where('kode','PB');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
 	function index (){
         $baca = $this->db->get('supplier');
         if($baca->num_rows() > 0){
@@ -193,6 +200,11 @@ class Mdl_pesananpembelian extends CI_Model {
 			$this->db->select('kode_item');
 			$this->db->select('item_nama');
 			return $this->db->get('item');
+		}
+
+		public function add_data($data) {
+			$this->db->insert('pesanan_keranjang', $data);
+			return $this->db->insert_id();
 		}
 
 }

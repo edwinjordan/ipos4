@@ -2,6 +2,7 @@
 $id = $_POST['kode_item'];
 $id2 = $_POST['kode_item_jenis'];
 $id3 = $_POST['kode_gudang'];
+$id4 = $_POST['urut'];
 ?>
 
 <section class="content">
@@ -13,7 +14,7 @@ $id3 = $_POST['kode_gudang'];
 
 <div id="panel-data">
 <form method="post" id="formAksi">
-<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+<table id="dynamic-table8" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th>No.</th>
@@ -45,9 +46,10 @@ $id3 = $_POST['kode_gudang'];
 	var kdItem = "<?php echo @$id;?>";
   var kdJenis = "<?php echo @$id2;?>";
   var kdGudang = "<?php echo @$id3;?>";
+	var urut = "<?php echo @$id4;?>";
 
   $(document).ready(function() {
-		table = $('#dynamic-table').DataTable({
+		table = $('#dynamic-table8').DataTable({
 
         "paging":   false,
         "ordering": false,
@@ -59,7 +61,7 @@ $id3 = $_POST['kode_gudang'];
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": link+"/ajax_listid/"+kdItem+"/"+kdJenis+"/"+kdGudang,
+            "url": link+"/ajax_listid/"+kdItem+"/"+kdJenis+"/"+kdGudang+"/"+urut,
             "type": "POST"
         },
 

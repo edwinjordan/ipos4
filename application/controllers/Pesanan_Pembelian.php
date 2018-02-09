@@ -134,16 +134,17 @@ class Pesanan_Pembelian extends CI_Controller {
 	function getNomor(){
 		  $rows = $this->Mdl_pesananpembelian->getnomor();
 			//print_r($this->db->last_query());
+					$y = date('Y');
           foreach ($rows as $row) {
-               echo $row['awalan'].str_pad($row['nomor'], 5, "0", STR_PAD_LEFT);
+               echo str_pad($row['nomor'], 4, "0", STR_PAD_LEFT).'/'.''.$row['kode'].'/'.''.'UTM'.'/'.$y;
           }
 	}
 
 	function updateNomor(){
-		$rows = $this->db->query('select * from t_nomor where kode="PCS"')->result_array();
+		$rows = $this->Mdl_pesananpembelian->updatenomor();
         foreach ($rows as $row) {
             $no = $row['nomor'] + 1;
-			$aksi = $this->db->update('t_nomor',array('nomor' => $no),array('kode' => 'PCS'));
+			$aksi = $this->db->update('t_nomor',array('nomor' => $no),array('kode' => 'PB'));
         }
 	}
 
@@ -176,6 +177,15 @@ class Pesanan_Pembelian extends CI_Controller {
 
 	public function create_load(){
 		$this->load->view('pesanan_pembelian/load_stok');
+	}
+
+	public function ajax_add() {
+		$data = array(
+				'kode_pesanan_keranjang'         => $this->input->post('id_transaksi'),
+			);
+		$insert = $this->Mdl_pesananpembelian->add_data($data);
+		//print_r($this->db->last_query());
+		echo json_encode(array('status' => TRUE));
 	}
 
 }

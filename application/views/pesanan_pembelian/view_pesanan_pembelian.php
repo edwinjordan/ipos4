@@ -31,7 +31,7 @@
 <div class="col-xs-12">
 <div class="box-header">
 
-	<form action="http://www.toko73wp.com/pembelian/pembelian_simpan" method="post" accept-charset="utf-8" class="form-horizontal" enctype="multipart/form-data">
+	<form class="form-horizontal" id="formAksi" method="post">
 
            	<div class="col-xs-12">
            		<div class="col-xs-2">
@@ -107,10 +107,9 @@
            		</div>
            	</div>
 
+		<input type="hidden" name="id_transaksi" id="id_transaksi">
+		<button type="button" class="btn btn-default" onclick="Tambah()"><i class="fa fa-plus"></i> Tambah Data</button>
 	</form>
-
-	<button class="btn btn-default" onclick="reload_table()"><i class="fa fa-refresh"></i> Reload</button>
-	<button class="btn btn-default" onclick="Tambah()"><i class="fa fa-plus"></i> Tambah Data</button>
 </div><br />
 <table id="dynamic-table" class="table table-striped table-bordered table-hover">
     <thead>
@@ -151,6 +150,13 @@
 	var table;
 
 	$(document).ready(function(){
+		$.get("<?php echo site_url('Pesanan_Pembelian/getNomor')?>", $(this).serialize())
+		.done(function(data) {
+			$('#id_transaksi').val(data);
+		});
+	});
+
+	$(document).ready(function(){
       //$('#idImgLoader').show(2000);
 	  $('#idImgLoader').fadeOut(2000);
 	  setTimeout(function(){
@@ -188,13 +194,36 @@
 
 	}).fnDestroy();
 
+	function updateNomor(){
+			$.get("<?php echo site_url('Pesanan_Pembelian/updateNomor')?>", $(this).serialize())
+			.done(function(data) {  });
+	}
+
 	function Tambah() {
 		save_method = 'add';
 		$('#panel-data').fadeOut('slow');
 		$('#form-data').fadeIn('slow');
-		$.get("<?php echo site_url('Pesanan_Pembelian/getNomor')?>", $(this).serialize())
-		.done(function(data) {
-			$('#kd_transaksi').val(data);
-		});
+		setTimeout(function(){
+					save();
+		}, 1000);
+		// setTimeout(function(){
+		// 			updateNomor();
+		// }, 1000);
+	}
+
+	function save() {
+
+			var url;
+			$.ajax({
+				url: link+"/ajax_add",
+				type: "POST",
+				data: $('#formAksi').serialize(),
+				dataType: "JSON",
+				success: function(result) {
+
+				}, error: function(jqXHR, textStatus, errorThrown) {
+
+				}
+			});
 	}
 </script>

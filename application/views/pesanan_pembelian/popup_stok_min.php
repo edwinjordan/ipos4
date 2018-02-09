@@ -1,20 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Admin Elecomp</title>
-<meta name="description" content="Marino, Admin theme, Dashboard theme, AngularJS Theme">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 
-<script src="<?= base_url(); ?>assets/js/jquery.js"></script>
-<script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-</head>
 <body data-layout="empty-layout" data-palette="palette-0">
-<div style="height:700px; width:100%; overflow-y:scroll ; overflow-x: hidden; padding-bottom:10px;">
 <section class="content">
   <div class="widget-box">
   <div class="widget-header">
@@ -104,13 +89,9 @@
               </div>
               <div class="col-xs-3">
                 <div class="form-group">
-                  <select class="form-control" name="kode_item">
-                      <?php
-                      $item = $this->db->get('item');
-                      foreach ($item->result() as $jenis): ?>
-                          <option value="<?php echo $jenis->kode_item;?>"><?php echo $jenis->item_nama;?></option>
-                      <?php endforeach; ?>
-
+                  <select class="form-control" name="urut" id="urut">
+                          <option value="kode_item">Kode Item</option>
+                          <option value="item_nama">Nama Item</option>
                   </select>
                 </div>
               </div>
@@ -153,7 +134,6 @@
   </div>
   </div>
 </section>
-</div>
 </body>
 <div class="modal fade" id="modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div class="modal-dialog">
@@ -223,13 +203,14 @@ $(document).ready(function(){
                       var kode_item=$("#kode_item").val();
                       var kode_item_jenis=$("#kode_item_jenis").val();
                       var kode_gudang=$("#kode_gudang").val();
+                      var urut=$("#urut").val();
 
-                      if(kode_item!="" && kode_item_jenis!="" && kode_gudang!=""){
+                      if(kode_item!="" && kode_item_jenis!="" && kode_gudang!="" && urut!=""){
                         $("#result").html("<img style='display: block; margin: 0 auto; text-align: center; ' src='<?php echo base_url();?>assets/images/ajax-loader.gif'/>");
                          $.ajax({
                             type:"post",
                             url:"<?php echo base_url('Pesanan_Pembelian/create_load'); ?>",
-                            data:{kode_item:kode_item, kode_item_jenis:kode_item_jenis, kode_gudang:kode_gudang},
+                            data:{kode_item:kode_item, kode_item_jenis:kode_item_jenis, kode_gudang:kode_gudang,urut:urut},
                             success:function(data){
                                 $("#result").html(data);
                              }
@@ -336,9 +317,3 @@ function pilihDatasupplier(id2, nama2){
 
 
 </script>
-<script src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/extensions/TableTools/js/dataTables.tableTools.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
-</html>

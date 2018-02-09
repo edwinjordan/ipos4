@@ -73,7 +73,7 @@
            		</div>
            		<div class="col-xs-2">
            			<div class="form-group">
-           				Kode Supplier
+           				Nama Supplier
            			</div>
            		</div>
            		<div class="col-xs-2">
@@ -85,7 +85,7 @@
            		</div>
            		<div class="col-xs-1">
            			<div class="form-group">
-		           		<button id="cari" type="button" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+		           		<button onclick="ca()" type="button" class="btn btn-default btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
 
 		           	</div>
 
@@ -97,7 +97,7 @@
     </form>
 
 
-<button id="stok" type="button" class="btn btn-default"><i class="fa fa-cog"></i> Cek Stok Minimum</button><br />
+<button onclick="stok()" type="button" class="btn btn-default"><i class="fa fa-cog"></i> Cek Stok Minimum</button><br />
 <!--<div class="box-header">
 	<button class="btn btn-default" onclick="reload_table()"><i class="fa fa-refresh"></i> Reload</button>
 	<button class="btn btn-danger" onclick="Tambah()"><i class="fa fa-plus"></i> Tambah Data</button>
@@ -282,6 +282,39 @@
 		</div>
 	</form>
 
+<div class="modal fade" id="modal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog">
+	  		<div class="modal-content">
+	    		<div class="modal-header">
+	     		 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	      			<h4 class="modal-title">Pilih Supplier</h4>
+	    		</div>
+	     		<div class="modal-body" style="overflow:auto;">
+						<?php	$this->load->view('pesanan_pembelian/popup_supplier');?>
+					</div>
+	      		<div class="modal-footer">
+	        		<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+	      		</div>
+	    	</div>
+	  	</div>
+</div>
+
+<div class="modal" id="modal-10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-lg">
+	  		<div class="modal-content">
+	    		<div class="modal-header">
+	     		 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	      			<h4 class="modal-title">Cek Stok Minimum</h4>
+	    		</div>
+	     		<div class="modal-body" style="overflow:auto;">
+							<?php	$this->load->view('pesanan_pembelian/popup_stok_min');?>
+					</div>
+	      		<div class="modal-footer">
+	        		<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+	      		</div>
+	    	</div>
+	  	</div>
+</div>
 
 <script>
 	var zonk='';
@@ -307,6 +340,14 @@
 		 });
 	});
 
+	function ca() {
+		$("#modal-3").modal('show');
+	}
+
+	function stok() {
+		$("#modal-10").modal('show');
+	}
+
 	$(function() {
 	    $('#kode_supplier').keyup(function(){
 	        var pm1=$('#kode_supplier').val();
@@ -329,12 +370,17 @@
 	  });
 
 	$(document).ready(function(){
+		 getNomor();
+	});
+
+	function getNomor(){
 		$.get("<?php echo site_url('Pesanan_Pembelian/getNomor')?>", $(this).serialize())
 		.done(function(data) {
 			$('#kd_transaksi').val(data);
 		});
-	});
+	}
 
+  setInterval('getNomor()', 2000);
 
 	$(document).ready(function() {
 		table = $('#dynamic-table2').DataTable({
@@ -361,5 +407,11 @@
     });
 
 	}).fnDestroy();
+
+	function pilihDatasupplier(id2, nama2){
+	    document.getElementById('supplier_nama').value = nama2;
+			document.getElementById('kode_supplier').value = id2;
+			$('#modal-3').modal('hide');
+	}
 
 </script>

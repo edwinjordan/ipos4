@@ -1,16 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-<title>Admin Elecomp</title>
-<meta name="description" content="Marino, Admin theme, Dashboard theme, AngularJS Theme">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css" />
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css" />
-
-<script src="<?= base_url(); ?>assets/js/jquery.js"></script>
-<script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
-</head>
 <body data-layout="empty-layout" data-palette="palette-0">
 <div class="col-md-12">
     <h3>Ambil Data</h3>
@@ -41,28 +28,10 @@
     </div>
     </div>
   </div>
-      <!-- <?php
-      if($data==true){
-      $no=1;
-      foreach ($data as $tampil){
-      $this->table->add_row($tampil->kode_supplier,$tampil->supplier_nama,'<button type="button" class="label label-info" onclick="ambilData('.$tampil->kode_supplier.')">Ambil Data</button>');
-      $no++;
-      }
-      $tabel=$this->table->generate();
-      echo $tabel;
-      }else {
-        echo "<div class='alert alert-danger'>Data Tidak Ditemukan</div>";
-      }
-      ?> -->
+
 </div>
 </body>
 <script type="text/javascript">
-function pilihDatasupplier(kode_supplier, supplier_nama){
-opener.document.form1.kode_supplier.value = kode_supplier;
-opener.document.form1.supplier_nama.value = supplier_nama;
-window.opener.focus();
-window.close();
-}
 
 $(document).ready(function() {
   table = $('#dynamic-table3').DataTable({
@@ -93,9 +62,3 @@ $(document).ready(function() {
 
 }).fnDestroy();
 </script>
-<script src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/extensions/TableTools/js/dataTables.tableTools.js"></script>
-<script src="<?php echo base_url();?>assets/js/dataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
-</html>

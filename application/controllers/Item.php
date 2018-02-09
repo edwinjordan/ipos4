@@ -16,7 +16,8 @@ class Item extends CI_Controller {
 		$kdItem = $this->uri->segment(3);
     $kdJenis = $this->uri->segment(4);
     $kdGudang = $this->uri->segment(5);
-		$list = $this->Mdl_iteme->get_datatablesid($kdItem,$kdJenis, $kdGudang);
+    $urut = $this->uri->segment(6);
+		$list = $this->Mdl_iteme->get_datatablesid($kdItem,$kdJenis, $kdGudang, $urut);
 		//print_r($this->db->last_query());
 		$data = array();
 		$no = $_REQUEST['start'];
@@ -30,15 +31,15 @@ class Item extends CI_Controller {
 			$row[] = $item->kode_item;
 			$row[] = $item->item_nama;
       $row[] = $item->item_jenis_nama;
-      $row[] = '';
+      $row[] = $item->item_qty;
       $row[] = $item->item_stok_min;
 			$data[] = $row;
 		}
 
 		$output = array(
 						"draw" => $_REQUEST['draw'],
-						"recordsTotal" => $this->Mdl_iteme->count_allid($kdItem,$kdJenis,$kdGudang),
-						"recordsFiltered" => $this->Mdl_iteme->count_filteredid($kdItem,$kdJenis,$kdGudang),
+						"recordsTotal" => $this->Mdl_iteme->count_allid($kdItem,$kdJenis,$kdGudang, $urut),
+						"recordsFiltered" => $this->Mdl_iteme->count_filteredid($kdItem,$kdJenis,$kdGudang,$urut),
 						"data" => $data,
 				);
 		echo json_encode($output);
