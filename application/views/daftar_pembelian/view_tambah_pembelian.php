@@ -557,7 +557,7 @@
                 $('[name="pembelian_detail_keranjang_harga"]').val(data.pembelian_detail_keranjang_harga);
                 $('[name="pembelian_detail_keranjang_diskon"]').val(data.pembelian_detail_keranjang_diskon);
                 $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-                $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+                $('.modal-title').text('Edit Data'); // Set title to Bootstrap modal title
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -599,7 +599,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title">Person Form</h3>
+                <h3 class="modal-title">Tambah Pembelian</h3>
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal">
