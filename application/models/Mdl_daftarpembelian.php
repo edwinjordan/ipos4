@@ -2,11 +2,10 @@
 
 class Mdl_daftarpembelian extends CI_Model {
 
-	var $table = 'tb_album';
-	var $column_order = array('id_album','album_nama','album_gambar',null); //set column field database for datatable orderable
-	var $column_search = array('id_album','album_nama','album_gambar'); //set column field database for datatable searchable just title , author , category are searchable
-	var $order = array('id_album' => 'asc'); // default order
-
+	var $table = 'pembelian_detail_keranjang';
+	var $column_order = array('kode_pembelian_detail_keranjang','kode_pembelian_keranjang','kode_satuan','pembelian_detail_keranjang_jumlah','pembelian_detail_keranjang_harga','pembelian_detail_keranjang_diskon',null); //set column field database for datatable orderable
+	var $column_search = array('kode_pembelian_detail_keranjang','kode_pembelian_keranjang','kode_satuan','pembelian_detail_keranjang_jumlah','pembelian_detail_keranjang_harga','pembelian_detail_keranjang_diskon'); //set column field database for datatable searchable just title , author , category are searchable
+	var $order = array('kode_pembelian_detail_keranjang' => 'asc'); // default order
 	private function _get_datatables_query() {
 		$this->db->from($this->table);
 		$i = 0;
@@ -40,6 +39,10 @@ class Mdl_daftarpembelian extends CI_Model {
 		return $query->num_rows();
 	}
 
+	public function getAll(){
+		$this->db->get($this->table);		
+	}
+
 	function count_all() {
 		$this->db->from($this->table);
 		return $this->db->count_all_results();
@@ -56,5 +59,25 @@ class Mdl_daftarpembelian extends CI_Model {
 		return $query->result();
 	}
 	
-
+	public function add($data) {
+		$this->db->insert($this->table, $data);
+		return $this->db->insert_id();
+	}
+	
+	public function get_by_id($id) {
+		$this->db->from($this->table);
+		$this->db->where('kode_pembelian_detail_keranjang',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	
+	public function update($where, $data) {
+		$this->db->update($this->table, $data, $where);
+		return $this->db->affected_rows();
+	}
+	
+	public function delete_by_id($id) {
+		$this->db->where('kode_pembelian_detail_keranjang', $id);
+		$this->db->delete($this->table);
+	}
 }	

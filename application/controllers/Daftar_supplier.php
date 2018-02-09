@@ -62,7 +62,7 @@ class Daftar_supplier extends CI_Controller {
 
 	public function ajax_add() {
 		$data = array(
-				'kode_supplier'         => $this->input->post('kode_supplier'),
+//				'kode_supplier'         => $this->input->post('kode_supplier'),
 				'supplier_nama' 	     => $this->input->post('supplier_nama'),
 				'supplier_alamat'       		 => $this->input->post('supplier_alamat'),
 				'kode_provinsi'         => $this->input->post('kode_provinsi'),
@@ -91,7 +91,7 @@ class Daftar_supplier extends CI_Controller {
 
 	public function ajax_update() {
 		$data = array(
-				'kode_supplier'         => $this->input->post('kode_supplier'),
+//				'kode_supplier'         => $this->input->post('kode_supplier'),
 				'supplier_nama' 	     => $this->input->post('supplier_nama'),
 				'supplier_alamat'       		 => $this->input->post('supplier_alamat'),
 				'kode_provinsi'         => $this->input->post('kode_provinsi'),

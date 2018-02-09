@@ -266,12 +266,7 @@
 <div class="row">
 <div class="col-xs-12">
 <form class="form-horizontal" role="form" id="formAksi">
-  <div class="form-group">
-  <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode </label>
-    <div class="col-sm-10">
-      <input type="text" id="kode_supplier" name="kode_supplier" placeholder="Kode" class="col-xs-10 col-sm-5" />
-    </div>
-  </div>
+    <input type="hidden" id="kode_supplier" name="kode_supplier" />
   <div class="form-group">
   <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama </label>
     <div class="col-sm-10">

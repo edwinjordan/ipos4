@@ -6,9 +6,9 @@ class Daftar_Pembelian extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-        $this->load->model('Mdl_daftarpembelian');
-        $this->load->model('Mdl_gudang');
-        $this->load->model('Mdl_daftarsupplier');
+		$this->load->model('Mdl_daftarpembelian');
+		$this->load->model('Mdl_daftarsupplier');
+		$this->load->model('Mdl_gudang');
 		$this->auth->restrict();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
@@ -16,7 +16,8 @@ class Daftar_Pembelian extends CI_Controller {
 
 	function tambah(){
         $data['view_file']    = "daftar_pembelian/view_tambah_pembelian";
-        $data['supplier']   = $this->Mdl_daftarsupplier->getAll()->result_array();
+        $data['supplier'] = $this->Mdl_daftarsupplier->getAll()->result_array();
+        $data['gudang'] = $this->Mdl_gudang->getAll()->result_array();
         $this->load->view('admin_view',$data);		
 	}
 
@@ -27,56 +28,34 @@ class Daftar_Pembelian extends CI_Controller {
 	function index(){
        // $this->mdl_home->getsqurity();
         $data['view_file']    = "daftar_pembelian/view_daftar_pembelian";
-        $data['gudang'] = $this->Mdl_gudang->getall()->result_array();
         $this->load->view('admin_view',$data);
     }
 
-     public function ajax_list() {
+    //pembelian detail keranjang
+     public function detail_list() {
 		$list = $this->Mdl_daftarpembelian->get_datatables();
 		$data = array();
-		$no = $_REQUEST['start'];
-		foreach ($list as $album) {
-			if($album->album_gambar==''){ $cover = 'no_image.jpg'; }else{ $cover = $album->album_gambar; }
-			$row2 = '<img src="'.base_url().'../assets/images/'.$cover.'" style="height: 500px; width: 600px;">';
-			$no++;
+//		$no = $_REQUEST['start'];
+		foreach ($list as $sup) {
+//			$no++;
+			$bil1 = $sup->pembelian_detail_keranjang_jumlah * $sup->pembelian_detail_keranjang_harga;
+			$bil2 = $sup->pembelian_detail_keranjang_jumlah * $sup->pembelian_detail_keranjang_harga * $sup->pembelian_detail_keranjang_diskon / 100;
+			$total = $bil1-$bil2;
 			$row = array();
-			$row[] = $no;
-			$row[] = $album->album_nama;
-			$row[] = '
-					  <a href="#modal-table'.$album->id_album.'" data-toggle="modal" class="tooltip-success" data-rel="tooltip" title="Edit">
-						<span class="green">
-							<i class="ace-icon fa fa-eye bigger-120"></i>
-						</span>
-					  </a>
-					  <div id="modal-table'.$album->id_album.'" class="modal fade" tabindex="-1">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header no-padding">
-									<div class="table-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-										<span class="white">&times;</span>
-									</button>
-									Gambar
-									</div>
-								</div>
-
-								<div class="modal-body no-padding">
-								<div align="center">
-									'.$row2.'
-								</div>		
-								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-						</div>	
-					 ';
+//			$row[] = $no;
+			$row[] = $sup->kode_pembelian_detail_keranjang;
+			$row[] = $sup->kode_pembelian_keranjang;
+			$row[] = $sup->kode_satuan;
+			$row[] = $sup->pembelian_detail_keranjang_jumlah;
+			$row[] = $sup->pembelian_detail_keranjang_harga;
+			$row[] = $sup->pembelian_detail_keranjang_diskon."%";
+			$row[] = $total;
 			$row[] = '
 			<div class="btn-group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Aksi <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)" onclick="edit('."'".$album->id_album."'".')">Edit</a></li>
-                            <li><a href="javascript:void(0)" onclick="hapus('."'".$album->id_album."'".')">Delete</a></li>
-							<li class="divider"></li>
-							<li><a href="gallery/'.$album->id_album.'/detail">Detail</a></li>
+                            <li><a href="javascript:void(0)" onclick="edit('."'".$sup->kode_pembelian_detail_keranjang."'".')">Edit</a></li>
+                            <li><a href="javascript:void(0)" onclick="hapus('."'".$sup->kode_pembelian_detail_keranjang."'".')">Delete</a></li>
                         </ul>
             </div>';
 			$data[] = $row;
@@ -90,4 +69,40 @@ class Daftar_Pembelian extends CI_Controller {
 				);
 		echo json_encode($output);
 	}
+
+	public function detail_add() {
+		$data = array(
+	'kode_pembelian_keranjang' 	    => $this->input->post('kode_pembelian_keranjang'),
+	'kode_satuan'       => $this->input->post('kode_satuan'),
+	'pembelian_detail_keranjang_jumlah'=> $this->input->post('pembelian_detail_keranjang_jumlah'),
+	'pembelian_detail_keranjang_harga'=> $this->input->post('pembelian_detail_keranjang_harga'),
+	'pembelian_detail_keranjang_diskon'=> $this->input->post('pembelian_detail_keranjang_diskon'),
+			);
+		$insert = $this->Mdl_daftarpembelian->add($data);
+		//print_r($this->db->last_query());
+		echo json_encode(array('status' => TRUE));
+	}
+
+	public function detail_edit($id) {
+		$data = $this->Mdl_daftarpembelian->get_by_id($id);
+		echo json_encode($data);
+	}
+	
+	public function detail_update() {
+		$data = array(
+	'kode_pembelian_keranjang' 	    => $this->input->post('kode_pembelian_keranjang'),
+	'kode_satuan'       => $this->input->post('kode_satuan'),
+	'pembelian_detail_keranjang_jumlah'=> $this->input->post('pembelian_detail_keranjang_jumlah'),
+	'pembelian_detail_keranjang_harga'=> $this->input->post('pembelian_detail_keranjang_harga'),
+	'pembelian_detail_keranjang_diskon'=> $this->input->post('pembelian_detail_keranjang_diskon'),
+			);
+		$this->Mdl_daftarpembelian->update(array('kode_pembelian_detail_keranjang' => $this->input->post('kode_pembelian_detail_keranjang')), $data);
+		echo json_encode(array("status" => TRUE));
+    }
+
+	public function detail_delete($id) {
+      $this->Mdl_daftarpembelian->delete_by_id($id);
+      echo json_encode(array("status" => TRUE));
+    }
+
 }		
