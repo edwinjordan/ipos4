@@ -86,7 +86,7 @@
         </div>
     </div>
 </div>
-</div>
+
 <script type="text/javascript">
     var zonk = '';
     var save_method;
@@ -335,7 +335,7 @@
                                             Telepon </label>
                                         <div class="col-sm-10">
                                             <input type="text" id="supplier_telpon" name="supplier_telpon"
-                                                   placeholder="Telepon" class="col-xs-10 col-sm-5"/>
+                                                   placeholder="Telepon" class="col-xs-10 col-sm-5" maxlength="12" required="required"/>
                                         </div>
                                     </div>
                                     <div class="form-group">

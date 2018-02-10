@@ -485,7 +485,7 @@
         $('.form-group').removeClass('has-error'); // clear error class
         $('.help-block').empty(); // clear error string
         $('#modal_form').modal('show'); // show bootstrap modal
-        $('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
+        $('.modal-title').text('Add Data'); // Set Title to Bootstrap modal title
     }
 
     function save() {
