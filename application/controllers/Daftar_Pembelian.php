@@ -121,17 +121,10 @@ class Daftar_Pembelian extends CI_Controller
         $data['error_string'] = array();
         $data['inputerror'] = array();
         $data['status'] = TRUE;
-        $angka = array(1);
 
         if ($this->input->post('kode_pembelian_keranjang') == '') {
             $data['inputerror'][] = 'kode_pembelian_keranjang';
             $data['error_string'][] = 'Masukkan Kodene Bossku!!!';
-            $data['status'] = FALSE;
-        }
-
-        elseif ($this->input->post('kode_pembelian_keranjang') != $angka) {
-            $data['inputerror'][] = 'kode_pembelian_keranjang';
-            $data['error_string'][] = 'Angkaaaa!!!';
             $data['status'] = FALSE;
         }
 
