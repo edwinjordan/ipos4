@@ -19,6 +19,7 @@
   <div class="row">
   <div class="col-xs-12">
     <form action="" name="form1" id="form1" method="post" enctype="multipart/form-data">
+
                	<div class="col-xs-12">
                		<div class="col-xs-2">
                			<div class="form-group">
@@ -196,6 +197,15 @@ $(function() {
    });
 });
 
+// $(document).ready(function(){
+//   $.get("<?php echo site_url('Pesanan_Pembelian/getNomor')?>", $(this).serialize())
+//   .done(function(data) {
+//     ///console.log("k"+data);
+//     // document.getElementById('kode').value = data;
+//     $('#kode').val(data);
+//   });
+// });
+
 $(document).ready(function(){
 
                  function search(){
@@ -231,6 +241,8 @@ $(document).ready(function(){
                       }
                   });
 });
+
+
 
 $(document).ready(function() {
   setTimeout(function(){
@@ -314,6 +326,7 @@ function pilihDatasupplier(id2, nama2){
 		document.getElementById('kode_supplier').value = id2;
 		$('#modal-2').modal('hide');
 }
+
 
 
 </script>

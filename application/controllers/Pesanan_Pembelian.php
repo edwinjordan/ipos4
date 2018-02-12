@@ -10,6 +10,7 @@ class Pesanan_Pembelian extends CI_Controller {
 		$this->auth->restrict();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
+		//$this->load_plugin_head[] = $this->load->view('js/scriptAct');
 	}
 
 	function index(){
@@ -66,14 +67,14 @@ class Pesanan_Pembelian extends CI_Controller {
 		$no++;
 		$row = array();
 		$row[] = $no;
-		$row[] = $pesanan->kode_item;
-		$row[] = $pesanan->pesanan_ket;
-		$row[] = $pesanan->pesanan_detail_jumlah;
 		$row[] = '';
-		$row[] = $pesanan->satuan_ket;
-		$row[] = $pesanan->pesanan_detail_harga;
-		$row[] = $pesanan->pesanan_detail_diskon;
-		$row[] = $pesanan->pesanan_total_akhir;
+		$row[] = $pesanan->kode_item;
+		$row[] = $pesanan->pesanan_keranjang_ket;
+		$row[] = $pesanan->pesanan_keranjang_total_item;
+		$row[] = $pesanan->pesanan_keranjang_total_item_terima;
+		$row[] = '';
+		$row[] = $pesanan->pesanan_detail_keranjang_harga;
+		$row[] = $pesanan->pesanan_detail_keranjang_diskon;
 		$row[] = '';
 		$data[] = $row;
 	}

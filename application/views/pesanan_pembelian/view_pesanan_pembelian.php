@@ -203,9 +203,9 @@
 		save_method = 'add';
 		$('#panel-data').fadeOut('slow');
 		$('#form-data').fadeIn('slow');
-		setTimeout(function(){
-					save();
-		}, 1000);
+		// setTimeout(function(){
+		// 			save();
+		// }, 1000);
 		// setTimeout(function(){
 		// 			updateNomor();
 		// }, 1000);

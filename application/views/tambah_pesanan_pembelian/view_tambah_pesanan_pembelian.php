@@ -114,7 +114,6 @@
 						<th>Harga</th>
 						<th>Potongan</th>
 						<th>Total</th>
-            <th>Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>

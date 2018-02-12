@@ -25,6 +25,10 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link href="<?= base_url(); ?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
         <link href="<?= base_url(); ?>assets/plugins/select2/select2.min.css" rel="stylesheet">
+
+		<!-- <link rel="stylesheet" href="<?php echo base_url();?>assets/css/editor.dataTables.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/select.dataTables.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/buttons.dataTables.min.css" />		 -->
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="../assets/css/ace-part2.css" class="ace-main-stylesheet" />
 		<![endif]-->
@@ -39,6 +43,10 @@
 		<script src="<?php echo base_url();?>assets/js/ace-extra.js"></script>
 		<script src="<?= base_url(); ?>assets/jquery/jquery-2.1.4.min.js"></script>
 		<script src="<?= base_url(); ?>assets/js/jquery.js"></script>
+		<!-- <script src="<?= base_url(); ?>assets/js/jquery-1.12.4.js"></script>
+		<script src="<?= base_url(); ?>assets/js/dataTables.editor.min.js"></script>
+		<script src="<?= base_url(); ?>assets/js/dataTables.buttons.min.js"></script>
+		<script src="<?= base_url(); ?>assets/js/dataTables.select.min.js"></script> -->
     <!-- <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script> -->
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 

@@ -50,7 +50,7 @@
 		<script src="<?php echo base_url();?>assets/js/date-time/moment.js"></script>
 		<script src="<?php echo base_url();?>assets/js/date-time/daterangepicker.js"></script>
 		<script src="<?php echo base_url();?>assets/js/date-time/bootstrap-datetimepicker.js"></script>
-
+		
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">

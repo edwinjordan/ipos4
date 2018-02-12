@@ -7,10 +7,10 @@ class Mdl_pesananpembelian extends CI_Model {
 	var $column_search = array('a.kode_pesanan','a.kode_supplier','a.kode_gudang_asal','a.kode_gudang_tujuan','a.kode_user_buat','a.kode_user_ubah','a.pesanan_tgl_pesan','a.pesanan_tgl_kirim','a.pesanan_ket','a.pesanan_diskon','a.pesanan_pajak','a.pesanan_dp','a.pesanan_total_item','a.pesanan_total_item_terima','a.pesanan_sub_total','a.pesanan_total_akhir','a.pesanan_kekurangan','b.nama_supplier'); //set column field database for datatable searchable just title , author , category are searchable
 	var $order = array('a.kode_pesanan' => 'asc'); // default order
 
-	var $table2 = 'pesanan_detail';
-	var $column_order_id = array('a.kode_pesanan_detail','a.kode_pesanan','a.kode_satuan','a.pesanan_detail_jumlah','a.pesanan_detail_jumlah_ambil','a.pesanan_detail_harga','a.pesanan_detail_diskon','a.kode_item','b.pesanan_total_akhir','c.satuan_ket',null); //set column field database for datatable orderable
-	var $column_search_id = array('a.kode_pesanan_detail','a.kode_pesanan','a.kode_satuan','a.pesanan_detail_jumlah','a.pesanan_detail_jumlah_ambil','a.pesanan_detail_harga','a.pesanan_detail_diskon','a.kode_item','b.pesanan_total_akhir','c.satuan_ket'); //set column field database for datatable searchable just title , author , category are searchable
-	var $order_id = array('a.kode_pesanan_detail' => 'asc'); // default order
+	var $table2 = 'pesanan_detail_keranjang';
+	var $column_order_id = array('a.kode_pesanan_detail_keranjang','a.kode_pesanan_keranjang','a.kode_satuan','a.kode_item','a.pesanan_detail_keranjang_jumlah','a.pesanan_detail_keranjang_jumlah_ambil','a.pesanan_detail_keranjang_harga','a.pesanan_detail_keranjang_diskon','b.kode_pesanan_keranjang','b.kode_supplier','b.kode_gudang_asal','b.kode_gudang_tujuan','b.kode_user_buat','b.kode_user_ubah','b.pesanan_keranjang_tgl_pesan','b.pesanan_keranjang_tgl_kirim','b.pesanan_keranjang_ket','b.pesanan_keranjang_diskon','b.pesanan_keranjang_pajak','b.pesanan_keranjang_dp','b.pesanan_keranjang_total_item',null); //set column field database for datatable orderable
+	var $column_search_id = array('a.kode_pesanan_detail_keranjang','a.kode_pesanan_keranjang','a.kode_satuan','a.kode_item','a.pesanan_detail_keranjang_jumlah','a.pesanan_detail_keranjang_jumlah_ambil','a.pesanan_detail_keranjang_harga','a.pesanan_detail_keranjang_diskon','b.kode_pesanan_keranjang','b.kode_supplier','b.kode_gudang_asal','b.kode_gudang_tujuan','b.kode_user_buat','b.kode_user_ubah','b.pesanan_keranjang_tgl_pesan','b.pesanan_keranjang_tgl_kirim','b.pesanan_keranjang_ket','b.pesanan_keranjang_diskon','b.pesanan_keranjang_pajak','b.pesanan_keranjang_dp','b.pesanan_keranjang_total_item'); //set column field database for datatable searchable just title , author , category are searchable
+	var $order_id = array('a.kode_pesanan_detail_keranjang' => 'asc'); // default order
 
 	var $table3 = 'supplier';
 	var $column_order_tb = array('kode_supplier','supplier_nama','supplier_alamat',null); //set column field database for datatable orderable
@@ -141,10 +141,9 @@ class Mdl_pesananpembelian extends CI_Model {
     }
 
 		private function _get_datatables_query_id() {
-			$this->db->select('a.*, b.*, c.*');
-			$this->db->from('pesanan_detail a');
-			$this->db->join('pesanan b','b.kode_pesanan=a.kode_pesanan','left outer');
-			$this->db->join('satuan c','c.kode_satuan=a.kode_satuan','left outer');
+			$this->db->select('a.*, b.*');
+			$this->db->from('pesanan_detail_keranjang a');
+			$this->db->join('pesanan_keranjang b','b.kode_pesanan_keranjang=a.kode_pesanan_keranjang','left outer');
 			$i = 0;
 			foreach ($this->column_search_id as $item) {
 				if ($_REQUEST['search']["value"]) {

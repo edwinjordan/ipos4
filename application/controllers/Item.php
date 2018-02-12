@@ -27,7 +27,7 @@ class Item extends CI_Controller {
 			$row = array();
 			$row[] = $no;
       $row[] = '
-            <input type="checkbox" name="cb_data[]" id="cb_data[]" value="'.$item->kode_item.'">';
+            <input type="checkbox" name="cb_data[]" id="kode_item" value="'.$item->kode_item.'">';
 			$row[] = $item->kode_item;
 			$row[] = $item->item_nama;
       $row[] = $item->item_jenis_nama;
@@ -44,5 +44,23 @@ class Item extends CI_Controller {
 				);
 		echo json_encode($output);
 	}
+
+  public function item_act(){
+
+    if(!empty($_POST['cb_data'])){
+      $jml=count($_POST['cb_data']);
+        for($i=0;$i<$jml;$i++){
+          $id=$_POST['cb_data'][$i];
+          $id2=$_POST['cb_data2'][$i];
+          $data2 = array(
+           'kode_item' => $id,
+           'kode_pesanan_keranjang' => $id2,
+          );
+
+          $this->db->insert('pesanan_detail_keranjang', $data2);
+          print_r($this->db->last_query());
+        }
+    }
+  }
 
 }
