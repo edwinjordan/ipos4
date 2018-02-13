@@ -80,4 +80,6 @@ class Mdl_gudang extends CI_Model {
 		$this->db->where('id_gudang', $id);
 		$this->db->delete($this->table);
 	}
+
+	
 }	

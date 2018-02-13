@@ -8,6 +8,14 @@ class About extends CI_Controller {
 		$this->load->model('Mdl_about');
 		$this->auth->restrict();
 	}
+
+	public function tes()
+	{
+		$date = date('Y-m-d');
+		$newdate = strtotime('-6 day', strtotime($date));
+		$newdate = date('Y-m-j', $newdate);
+		echo $newdate;
+	}
 	
 	 function index(){
        // $this->mdl_home->getsqurity();

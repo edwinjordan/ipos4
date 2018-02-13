@@ -2,13 +2,51 @@
 
 class Mdl_returpembelian extends CI_Model {
 
-	var $table = 'tb_album';
-	var $column_order = array('id_album','album_nama','album_gambar',null); //set column field database for datatable orderable
-	var $column_search = array('id_album','album_nama','album_gambar'); //set column field database for datatable searchable just title , author , category are searchable
-	var $order = array('id_album' => 'asc'); // default order
+	var $table = 'retur_beli';
+	// var $column_order = array('id_album','album_nama','album_gambar',null); //set column field database for datatable orderable
+	var $column_search = array('retur_beli_tgl, kode_supplier, supplier_nama'); //set column field database for datatable searchable just title , author , category are searchable
+	// 	var $order = array('id_album' => 'asc'); // default order
 
 	private function _get_datatables_query() {
-		$this->db->from($this->table);
+		$this->db->select('r.retur_beli_tgl, r.kode_supplier, s.supplier_nama, r.retur_beli_ket, r.retur_beli_total_akhir');
+		$this->db->from('retur_beli as r');
+		$this->db->join('supplier as s', 'r.kode_supplier = s.kode_supplier');
+
+		$i = 0;
+		foreach ($this->column_search as $item) {
+			if ($_REQUEST['search']["value"]) {
+				if ($i===0) {
+					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+					$this->db->like($item, $_REQUEST['search']["value"]);
+				} else {
+					$this->db->or_like($item, $_REQUEST['search']["value"]);
+			}
+			
+			if (count($this->column_search) - 1 == $i)
+				$this->db->group_end();
+			}
+
+			$i++;
+		}
+
+		if (isset($_REQUEST['order'])) {
+			$this->db->order_by($this->column_order[$_REQUEST['order']['0']['column']], $_REQUEST['order']['0']['dir']);
+		} else if (isset($this->order)) {
+			$order = $this->order;
+			$this->db->order_by(key($order), $order[key($order)]);
+		}
+	}
+
+	private function _get_datatables_query_cari($cari, $min_tgl, $kode_gudang) {
+		$first_date = $this->minTanggal($min_tgl);
+		$this->db->select('r.retur_beli_tgl, r.kode_supplier, s.supplier_nama, r.retur_beli_ket, r.retur_beli_total_akhir')
+				->from('retur_beli as r')
+				->join('supplier as s', 'r.kode_supplier = s.kode_supplier')
+				->where('r.retur_beli_tgl >=', $first_date)
+				->where('r.kode_gudang_asal =', $kode_gudang);
+		$where = "(r.kode_supplier LIKE '%$cari%' OR s.supplier_nama LIKE '%$cari%')";
+		$this->db->where($where);
+
 		$i = 0;
 		foreach ($this->column_search as $item) {
 			if ($_REQUEST['search']["value"]) {
@@ -55,6 +93,24 @@ class Mdl_returpembelian extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
+
+	public function get_datatables_cari($cari, $min_tgl, $kode_gudang) {
+		$this->_get_datatables_query_cari($cari, $min_tgl, $kode_gudang);
+
+		if ($_REQUEST['length'] != -1) {
+			$this->db->limit($_REQUEST['length'], $_REQUEST['start']);
+		}
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function minTanggal($min_tgl)
+	{
+		$now = date('Y-m-d');
+		$result = strtotime('-'. $min_tgl .'day', strtotime($now));
+		$result= date('Y-m-d', $result);
+		return $result;
+	}
 
 }	
