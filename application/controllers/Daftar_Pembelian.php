@@ -46,15 +46,16 @@ class Daftar_Pembelian extends CI_Controller
             $bil1 = $sup->pembelian_detail_keranjang_jumlah * $sup->pembelian_detail_keranjang_harga;
             $bil2 = $sup->pembelian_detail_keranjang_jumlah * $sup->pembelian_detail_keranjang_harga * $sup->pembelian_detail_keranjang_diskon / 100;
             $total = $bil1 - $bil2;
+            $harga = $sup->pembelian_detail_keranjang_harga;
             $row = array();
 //			$row[] = $no;
             $row[] = $sup->kode_pembelian_detail_keranjang;
             $row[] = $sup->kode_pembelian_keranjang;
             $row[] = $sup->kode_satuan;
             $row[] = $sup->pembelian_detail_keranjang_jumlah;
-            $row[] = $sup->pembelian_detail_keranjang_harga;
+            $row[] = $this->convRupiah($harga);
             $row[] = $sup->pembelian_detail_keranjang_diskon . "%";
-            $row[] = $total;
+            $row[] = $this->convRupiah($total);
             $row[] = '
 			<div class="btn-group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Aksi <span class="caret"></span></button>
@@ -113,6 +114,11 @@ class Daftar_Pembelian extends CI_Controller
     {
         $this->Mdl_daftarpembelian->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
+    }
+
+    function convRupiah($value)
+    {
+        return 'Rp. '.number_format($value);
     }
 
     private function _validate()

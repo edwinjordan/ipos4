@@ -660,3 +660,35 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script>
+    //---------------------------titik-------------------------
+
+    var tanpa_pembagi = document.getElementById('pembelian_detail_keranjang_harga');
+    tanpa_pembagi.addEventListener('keyup', function(e)
+    {
+        tanpa_pembagi.value = formatpembagi(this.value);
+    });
+
+
+    /* Fungsi */
+    function formatpembagi(angka, prefix)
+    {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split	= number_string.split(','),
+            sisa 	= split[0].length % 3,
+            pembagi 	= split[0].substr(0, sisa),
+            ribuan 	= split[0].substr(sisa).match(/\d{3}/gi),
+            min = '';
+        if (angka.substr(0,1)=='-') {
+            min = '-';
+        }
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            pembagi += separator + ribuan.join('.');
+        }
+
+        pembagi = split[1] != undefined ? min+pembagi + ',' + split[1] : min+pembagi;
+        return prefix == undefined ? pembagi : (pembagi ? 'Rp. ' + pembagi : '');
+    }
+</script>
