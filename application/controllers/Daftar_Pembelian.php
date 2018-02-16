@@ -13,13 +13,21 @@ class Daftar_Pembelian extends CI_Controller
         $this->auth->restrict();
         date_default_timezone_set("Asia/Jakarta");
         $this->load->library("session");
+
+        $this->load->helper(array('form', 'url'));
+
+        $this->load->library('form_validation');
     }
 
     function tambah()
     {
+      $this->form_validation->set_rules('kode_pembelian_keranjang', 'Harus Diisi!!', 'required');
+
+
         $data['view_file'] = "daftar_pembelian/view_tambah_pembelian";
         $data['supplier'] = $this->Mdl_daftarsupplier->getAll()->result_array();
         $data['gudang'] = $this->Mdl_gudang->getAll()->result_array();
+        $data['subtot'] = $this->Mdl_daftarpembelian->getAll()->result_array();
         $this->load->view('admin_view', $data);
     }
 
@@ -78,7 +86,7 @@ class Daftar_Pembelian extends CI_Controller
 
     public function detail_add()
     {
-        $this->_validate();
+        // $this->_validate();
         $data = array(
             'kode_pembelian_keranjang' => $this->input->post('kode_pembelian_keranjang'),
             'kode_satuan' => $this->input->post('kode_satuan'),
@@ -158,4 +166,4 @@ class Daftar_Pembelian extends CI_Controller
         }
     }
 
-}		
+}

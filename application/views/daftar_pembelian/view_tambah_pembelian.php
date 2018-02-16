@@ -228,24 +228,32 @@
                                     <div class="col-xs-1">
                                         <div class="form-group">
                                             Sub Total
+                                            <?php
+                                            $sub1 = 0;
+                                            $sub2 = 0;
+                                            foreach($subtot as $sup) {
+                                                $bil1 = $sup['pembelian_detail_keranjang_jumlah'] * $sup['pembelian_detail_keranjang_harga'];
+                                                $bil2 = $sup['pembelian_detail_keranjang_jumlah'] * $sup['pembelian_detail_keranjang_harga'] * $sup['pembelian_detail_keranjang_diskon'] / 100;
+                                                $oi = $sup['pembelian_detail_keranjang_jumlah'];
+                                                $total = $bil1 - $bil2;
+                                                $sub1 = $sub1+$oi;
+                                                $sub2 = $sub2+$total;
+
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-xs-1">
                                         <div class="form-group">
-                                            <input class="form-control" name="sub_total" value="0,00" readonly=""
+                                            <input class="form-control" name="sub_total" value="<?php echo ($sub1)?>" readonly=""
                                                    type="text">
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-1">
+                                    <div class="col-xs-2">
                                         <div class="form-group">
-                                            <input class="form-control" name="sub_total1" value="" readonly=""
+                                            <input class="form-control" name="sub_total1" value="<?php echo 'Rp. '.number_format($sub2) ?>" readonly=""
                                                    type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <div class="form-group">
-
                                         </div>
                                     </div>
                                     <div class="col-xs-1">
@@ -591,7 +599,6 @@
         }
     }
 </script>
-
 
 <div class="modal fade" id="modal_form" role="form">
     <div class="modal-dialog">

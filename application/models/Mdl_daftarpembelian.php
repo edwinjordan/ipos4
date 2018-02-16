@@ -17,7 +17,7 @@ class Mdl_daftarpembelian extends CI_Model {
 				} else {
 					$this->db->or_like($item, $_REQUEST['search']["value"]);
 			}
-			
+
 			if (count($this->column_search) - 1 == $i)
 				$this->db->group_end();
 			}
@@ -40,7 +40,7 @@ class Mdl_daftarpembelian extends CI_Model {
 	}
 
 	public function getAll(){
-		$this->db->get($this->table);		
+		return $this->db->get($this->table);
 	}
 
 	function count_all() {
@@ -58,26 +58,26 @@ class Mdl_daftarpembelian extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
+
 	public function add($data) {
 		$this->db->insert($this->table, $data);
 		return $this->db->insert_id();
 	}
-	
+
 	public function get_by_id($id) {
 		$this->db->from($this->table);
 		$this->db->where('kode_pembelian_detail_keranjang',$id);
 		$query = $this->db->get();
 		return $query->row();
 	}
-	
+
 	public function update($where, $data) {
 		$this->db->update($this->table, $data, $where);
 		return $this->db->affected_rows();
 	}
-	
+
 	public function delete_by_id($id) {
 		$this->db->where('kode_pembelian_detail_keranjang', $id);
 		$this->db->delete($this->table);
 	}
-}	
+}
