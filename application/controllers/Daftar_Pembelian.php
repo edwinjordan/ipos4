@@ -13,10 +13,6 @@ class Daftar_Pembelian extends CI_Controller
         $this->auth->restrict();
         date_default_timezone_set("Asia/Jakarta");
         $this->load->library("session");
-
-        $this->load->helper(array('form', 'url'));
-
-        $this->load->library('form_validation');
     }
 
     function tambah()
