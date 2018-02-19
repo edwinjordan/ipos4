@@ -384,6 +384,9 @@
 	$(document).ready(function() {
 		table = $('#dynamic-table2').DataTable({
 
+			 "paging":   false,
+			 "ordering": false,
+			 "info":     false,
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
 				"bDestroy": true,
@@ -411,6 +414,10 @@
 	    document.getElementById('supplier_nama').value = nama2;
 			document.getElementById('kode_supplier').value = id2;
 			$('#modal-3').modal('hide');
+	}
+
+	function reload_table() {
+    	table.ajax.reload(null, false);
 	}
 
 </script>

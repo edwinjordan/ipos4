@@ -86,6 +86,12 @@ $id4 = $_POST['urut'];
     });
   });
 
+	function reload_table() {
+    	table.ajax.reload(null, false);
+	}
+
+	var $a = $('#dynamic-table2');
+
 	$(document).on('submit', '#formAksi', function(e) {
       e.preventDefault();
       if (confirm('Apakah Anda Yakin Memilih Data Ini???')) {
@@ -98,9 +104,7 @@ $id4 = $_POST['urut'];
                 processData:false,
                 success: function(data){
 								$('#modal-10').modal('hide');
-                setTimeout(function(){
-                    reload_table();
-                }, 1000);
+                $('#dynamic-table2').DataTable().ajax.reload();
 
 
                 }
