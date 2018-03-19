@@ -9,7 +9,7 @@ class About extends CI_Controller {
 		$this->auth->restrict();
 	}
 
-	public function tes()
+	public function test()
 	{
 		$date = date('Y-m-d');
 		$newdate = strtotime('-6 day', strtotime($date));
