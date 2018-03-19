@@ -3,12 +3,12 @@
 class Mdl_returpembelian extends CI_Model {
 
 	var $table = 'retur_beli';
-	// var $column_order = array('id_album','album_nama','album_gambar',null); //set column field database for datatable orderable
+	var $column_order = array('kode_supplier'); //set column field database for datatable orderable
 	var $column_search = array('retur_beli_tgl, kode_supplier, supplier_nama'); //set column field database for datatable searchable just title , author , category are searchable
-	// 	var $order = array('id_album' => 'asc'); // default order
+	var $order = array('kode_retur_beli' => 'asc'); // default order
 
 	private function _get_datatables_query() {
-		$this->db->select('r.retur_beli_tgl, r.kode_supplier, s.supplier_nama, r.retur_beli_ket, r.retur_beli_total_akhir');
+		$this->db->select('r.kode_retur_beli, r.retur_beli_tgl, r.kode_supplier, s.supplier_nama, r.retur_beli_ket, r.retur_beli_total_akhir');
 		$this->db->from('retur_beli as r');
 		$this->db->join('supplier as s', 'r.kode_supplier = s.kode_supplier');
 
@@ -111,6 +111,11 @@ class Mdl_returpembelian extends CI_Model {
 		$result = strtotime('-'. $min_tgl .'day', strtotime($now));
 		$result= date('Y-m-d', $result);
 		return $result;
+	}
+
+	public function ajax_delete($id)
+	{
+		$this->db->delete($this->table, array('kode_retur_beli' => $id));
 	}
 
 }	

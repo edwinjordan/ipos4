@@ -6,15 +6,23 @@ class Daftar_Pembayaran_Pembelian extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Mdl_daftarpembayaranpembelian');
+		$this->load->model('Mdl_daftarsupplier');
 		$this->auth->restrict();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
+
+	}
+
+	public function cek($kata, $date)
+	{
+		$this->Mdl_daftarpembayaranpembelian->kata_kunci($kata, $date);
 	}
 
 	function index(){
        // $this->mdl_home->getsqurity();
         $data['view_file']    = "daftar_pembayaran_pembelian/view_daftar_pembayaran_pembelian";
         $this->load->view('admin_view',$data);
+
     }
 
     function tambah(){
@@ -24,53 +32,25 @@ class Daftar_Pembayaran_Pembelian extends CI_Controller {
     }
 
     public function ajax_list() {
-		$list = $this->Mdl_daftarpembayaranpembelian->get_datatables();
+		$list = $this->Mdl_daftarpembayaranpembelian->get_datatables();	
 		$data = array();
 		$no = $_REQUEST['start'];
-		foreach ($list as $album) {
-			if($album->album_gambar==''){ $cover = 'no_image.jpg'; }else{ $cover = $album->album_gambar; }
-			$row2 = '<img src="'.base_url().'../assets/images/'.$cover.'" style="height: 500px; width: 600px;">';
-			$no++;
+		foreach ($list as $bayar) {
 			$row = array();
-			$row[] = $no;
-			$row[] = $album->album_nama;
-			$row[] = '
-					  <a href="#modal-table'.$album->id_album.'" data-toggle="modal" class="tooltip-success" data-rel="tooltip" title="Edit">
-						<span class="green">
-							<i class="ace-icon fa fa-eye bigger-120"></i>
-						</span>
-					  </a>
-					  <div id="modal-table'.$album->id_album.'" class="modal fade" tabindex="-1">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header no-padding">
-									<div class="table-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-										<span class="white">&times;</span>
-									</button>
-									Gambar
-									</div>
-								</div>
+			$row[] = $bayar->kode_hutang_bayar;
+			$row[] = $bayar->hutang_bayar_tgl;
+			$row[] = 'tunai';
+			$row[] = $bayar->kode_supplier;
+			$row[] = $bayar->supplier_nama;
+			$row[] = 'qwe';
+			$row[] = $bayar->hutang_bayar_ket;
+			$row[] = $bayar->hutang_bayar_total_bayar;
+			$row[] = 'qw';
+			$row[] = 'qw';
 
-								<div class="modal-body no-padding">
-								<div align="center">
-									'.$row2.'
-								</div>		
-								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-						</div>	
-					 ';
-			$row[] = '
-			<div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Aksi <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)" onclick="edit('."'".$album->id_album."'".')">Edit</a></li>
-                            <li><a href="javascript:void(0)" onclick="hapus('."'".$album->id_album."'".')">Delete</a></li>
-							<li class="divider"></li>
-							<li><a href="gallery/'.$album->id_album.'/detail">Detail</a></li>
-                        </ul>
-            </div>';
+			//BUTTON UPDATE DAN DELETE
+            $row[] = '<a href="'.base_url("Daftar_Pembayaran_Pembelian/ajax_update/".$bayar->kode_hutang_bayar).'" class="btn btn-primary btn-flat" >Edit</a>
+            <a href="'.base_url("Daftar_Pembayaran_Pembelian/ajax_delete/".$bayar->kode_hutang_bayar).'" class="btn btn-primary btn-flat" >Delete</a>';
 			$data[] = $row;
 		}
 
@@ -81,5 +61,65 @@ class Daftar_Pembayaran_Pembelian extends CI_Controller {
 						"data" => $data,
 				);
 		echo json_encode($output);
-}		
+	}
+
+	//UPDATE
+	public function ajax_update($id)
+	{
+		$data['view_file']    = "tambah_pembayaran_hutang_pembelian/view_edit_pembayaran_hutang_pembelian";
+        $data['supplier']    = $this->Mdl_daftarsupplier->get_data_supplier();
+        $data['getUpdate']    = $this->Mdl_daftarpembayaranpembelian->get_by_id($id);
+        $this->load->view('admin_view',$data);
+		
+	}
+
+	public function update_hutang(){
+		$data = array(
+			'hutang_bayar_tgl' => $this->input->post('hutang_bayar_tgl'),
+			'hutang_bayar_ket' => $this->input->post('ket'),
+			'hutang_bayar_total_bayar' =>$this->input->post('hutang_bayar_total_bayar'),
+			'kode_supplier' => $this->input->post('supplier')
+		);
+		$where = array('kode_hutang_bayar' => $this->input->post('kode_hutang'));
+		$this->Mdl_daftarpembayaranpembelian->update_daftar($where, $data);
+		// echo json_encode(array("status" => TRUE));
+	}
+	//END UPDATE
+	
+
+	//DELETE
+	public function ajax_delete($id) {
+      $this->Mdl_daftarpembayaranpembelian->delete_by_id($id);
+      redirect('Daftar_Pembayaran_Pembelian');
+    }
+    //END DELETE
+
+	public function ajax_list_kata_kunci($kata, $date) {
+		$list = $this->Mdl_daftarpembayaranpembelian->get_datatables_kata_kunci($kata, $date);	
+		$data = array();
+		$no = $_REQUEST['start'];
+		foreach ($list as $album) {
+			$no++;
+			$row = array();
+			$row[] = $no;
+			$row[] = $album->hutang_bayar_tgl;
+			$row[] = 'tunai';
+			$row[] = $album->kode_supplier;
+			$row[] = $album->supplier_nama;
+			$row[] = 'qwe';
+			$row[] = $album->hutang_bayar_ket;
+			$row[] = $album->hutang_bayar_total_bayar;
+			$row[] = 'qw';
+			$row[] = 'qw';
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_REQUEST['draw'],
+						"recordsTotal" => $this->Mdl_daftarpembayaranpembelian->count_all(),
+						"recordsFiltered" => $this->Mdl_daftarpembayaranpembelian->count_filtered(),
+						"data" => $data,
+				);
+		echo json_encode($output);
+}			
 }

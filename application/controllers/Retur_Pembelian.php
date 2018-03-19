@@ -7,6 +7,7 @@ class Retur_Pembelian extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Mdl_returpembelian');
 		$this->load->model('Mdl_gudang');
+		$this->load->model('Mdl_daftarsupplier');
 		$this->auth->restrict();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->library("session");
@@ -29,7 +30,15 @@ class Retur_Pembelian extends CI_Controller {
 	function tambah(){
        // $this->mdl_home->getsqurity();
 		$data['view_file']    = "retur_pembelian/view_tambah_retur_pembelian";
+		$data['gudang'] = $this->Mdl_gudang->getall()->result();
+		$data['supplier'] = $this->Mdl_daftarsupplier->getAll()->result();
 		$this->load->view('admin_view',$data);
+	}
+
+	public function ajax_delete($id)
+	{
+		$this->Mdl_returpembelian->ajax_delete($id);
+		echo json_encode(array('status' => TRUE));
 	}
 
 	public function ajax_list() {
@@ -48,6 +57,7 @@ class Retur_Pembelian extends CI_Controller {
 			$row[] = $retur->retur_beli_total_akhir;
 			$row[] = 'userbuat';
 			$row[] = 'userubah';
+			$row[] = "<button type='button' class='btn btn-default' onclick='hapus(" .$retur->kode_retur_beli .")'><i class='fa fa-trash-o'></i></button>";
 			$data[] = $row;
 		}
 
@@ -76,6 +86,7 @@ class Retur_Pembelian extends CI_Controller {
 			$row[] = $retur->retur_beli_total_akhir;
 			$row[] = 'userbuat';
 			$row[] = 'userubah';
+			$row[] = '<button type="button" class="btn btn-default" onclick="hapus"><i class="fa fa-trash-o"></i></button>';
 			$data[] = $row;
 		}
 

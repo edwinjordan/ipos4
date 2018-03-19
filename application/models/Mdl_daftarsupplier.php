@@ -6,6 +6,12 @@ class Mdl_daftarsupplier extends CI_Model {
 	var $column_order = array('kode_supplier','supplier_nama','supplier_alamat','kode_provinsi','kode_kota','kode_kecamatan','supplier_kodepos','supplier_fax','supplier_telpon','supplier_email','supplier_nohp','supplier_norek','supplier_rekan','supplier_bank','supplier_ket','supplier_jatuhtempo',null); //set column field database for datatable orderable
 	var $column_search = array('kode_supplier','supplier_nama','supplier_alamat','kode_provinsi','kode_kota','kode_kecamatan','supplier_kodepos','supplier_fax','supplier_telpon','supplier','supplier_nohp','supplier_norek','supplier_rekan','supplier_bank','supplier_ket','supplier_jatuhtempo'); //set column field database for datatable searchable just title , author , category are searchable
 	var $order = array('kode_supplier' => 'asc'); // default order
+
+	public function get_data_supplier()
+	{
+		return $this->db->get('supplier')->result();
+	}
+
 	private function _get_datatables_query() {
 		$this->db->from($this->table);
 		$i = 0;
