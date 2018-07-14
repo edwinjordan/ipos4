@@ -33,6 +33,7 @@ class Pesanan_Pembelian extends CI_Controller {
 		foreach ($list as $pesanan) {
 			$no++;
 			$row = array();
+
 			$row[] = $no;
 			$row[] = $pesanan->kode_pesanan;
 			$row[] = $pesanan->pesanan_tgl_pesan;
@@ -66,11 +67,12 @@ class Pesanan_Pembelian extends CI_Controller {
 	foreach ($list as $pesanan) {
 		$no++;
 		$row = array();
+		$row[] = '<input type="checkbox" name="cb_data[]" id="kode_item" value="'.$pesanan->kode_item.'">';
 		$row[] = $no;
-		$row[] = '';
 		$row[] = $pesanan->kode_item;
-		$row[] = $pesanan->pesanan_keranjang_ket;
-		$row[] = $pesanan->pesanan_keranjang_total_item;
+		$row[] = $pesanan->item_nama;
+		$row[] = $pesanan->pesanan_detail_keranjang_jumlah;
+		$row[] = $pesanan->pesanan_detail_keranjang_jumlah_ambil;
 		$row[] = $pesanan->pesanan_keranjang_total_item_terima;
 		$row[] = '';
 		$row[] = $pesanan->pesanan_detail_keranjang_harga;

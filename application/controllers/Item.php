@@ -55,6 +55,9 @@ class Item extends CI_Controller {
           $data2 = array(
            'kode_item' => $id,
            'kode_pesanan_keranjang' => $id2,
+           'pesanan_detail_keranjang_jumlah' => 1,
+           'pesanan_detail_keranjang_jumlah_ambil' => 0,
+           'kode_satuan' => 0,
           );
 
           $this->db->insert('pesanan_detail_keranjang', $data2);

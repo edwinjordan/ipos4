@@ -32,6 +32,7 @@
 </div>
 </body>
 <script type="text/javascript">
+var table;
 
 $(document).ready(function() {
   table = $('#dynamic-table3').DataTable({

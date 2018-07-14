@@ -141,9 +141,10 @@ class Mdl_pesananpembelian extends CI_Model {
     }
 
 		private function _get_datatables_query_id() {
-			$this->db->select('a.*, b.*');
+			$this->db->select('a.*, b.*, c.*');
 			$this->db->from('pesanan_detail_keranjang a');
 			$this->db->join('pesanan_keranjang b','b.kode_pesanan_keranjang=a.kode_pesanan_keranjang','left outer');
+			$this->db->join('item c','c.kode_item=a.kode_item','left outer');
 			$i = 0;
 			foreach ($this->column_search_id as $item) {
 				if ($_REQUEST['search']["value"]) {

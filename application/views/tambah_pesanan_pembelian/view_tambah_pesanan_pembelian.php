@@ -68,7 +68,7 @@
            		</div>
            		<div class="col-xs-2">
            			<div class="form-group">
-		           		<input class="form-control date-picker" type="text" id="tgl_nota_supplier_pembelian" name="tgl_nota_supplier_pembelian" value="<?php echo date('Y-m-d');?>" data-date-format="dd-mm-yyyy">
+		           		<input class="form-control" type="date" id="tgl_nota_supplier_pembelian" name="tgl_nota_supplier_pembelian">
 		           	</div>
            		</div>
            		<div class="col-xs-2">
@@ -105,8 +105,9 @@
 <table id="dynamic-table2" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th>No.</th>
-            <th>Kode Item</th>
+        				<th></th>
+			        	<th>No.</th>
+			            <th>Kode Item</th>
 						<th>Keterangan</th>
 						<th>Jumlah Pesanan</th>
 						<th>Jumlah Sudah Terima</th>
@@ -139,7 +140,7 @@
         </div>
         <div class="col-xs-3">
            	<div class="form-group">
-		        <input class="form-control" type="text" value="2018-01-22 16:10" name="tgl_nota_supplier_pembelian" id="reservation">
+		        <input class="form-control" type="date" name="tgl_nota_supplier_pembelian" id="reservation">
 		    </div>
         </div>
 
